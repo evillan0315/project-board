@@ -8,22 +8,44 @@ A developer-focused layout system interface, implemented using TypeScript, Vite,
 
 ```
 
-vscode-layout/
-├── generateStructure.ts              # Utility to generate directory tree structure
-├── generateStructureRunner.ts        # CLI runner to generate and save the structure as JSON
+project-board/
+│
+├── .gitignore
+├── README.md
+├── index.html
 ├── package.json
 ├── pnpm-lock.yaml
-├── tsconfig.json
-├── src/
-│   ├── App.tsx                       # Root application component
-│   ├── app.css                       # App-level styles
-│   ├── index.css                     # Global styles
-│   ├── main.tsx                      # App entry point
-│   ├── vite.config.ts                # Vite configuration
-│   ├── components/
+├── pnpm-workspace.yaml
+├── prettier.config.cjs
+│
+├── dist/                          # Compiled output files
+│   ├── _...slug_-Dt0TiDlw.js
+│   ├── index-G72cJpw_.js
+│   ├── index.js
+│   └── vscode-layout.css
+│
+├── libs/                          # Utility scripts
+│   ├── generateStructure.ts
+│   └── generateStructureRunner.ts
+│
+├── src/                           # Application source
+│   ├── App.tsx
+│   ├── app.css
+│   │
+│   ├── components/                # Reusable UI components
+│   │   ├── Editor.tsx
+│   │   ├── FeatureCard.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Loading.tsx
+│   │   ├── LoginForm.tsx
 │   │   ├── Logo.tsx
+│   │   ├── MetricCard.tsx
+│   │   ├── SignInWithGithub.tsx
+│   │   ├── SignInWithGoogle.tsx
 │   │   ├── ThemeToggle.tsx
-│   │   ├── layouts/
+│   │   ├── docs/
+│   │   │   └── DocPageList.tsx
+│   │   ├── layouts/               # Layout structure and navigation
 │   │   │   ├── Footer.tsx
 │   │   │   ├── Header.tsx
 │   │   │   ├── Layout.tsx
@@ -32,40 +54,26 @@ vscode-layout/
 │   │   │   ├── Nav.tsx
 │   │   │   ├── RightSidebar.tsx
 │   │   │   ├── types.ts
-│   │   │   ├── content/
-│   │   │   │   ├── Content.tsx
-│   │   │   │   ├── ContentHeader.tsx
-│   │   │   │   ├── ContentLayout.tsx
-│   │   │   ├── react/
-│   │   │   │   └── Layout.tsx
-│   │   │   ├── solid/
-│   │   │   │   └── Layout.tsx
-│   │   ├── pages/
-│   │       ├── DynamicPage.tsx
-│   │       ├── EditorPage.tsx
-│   │       ├── Page.tsx
-│   │       ├── PageHeader.tsx
-│   │       ├── PageSection.tsx
-│   ├── configs/                      # (Currently empty)
-│   ├── contexts/
-│   │   ├── AuthContext.ts
-│   │   ├── ThemeContext.tsx
-│   │   ├── ThemeProvider.tsx
-│   ├── data/
-│   │   ├── app.ts
-│   │   ├── menus.ts
-│   ├── docs/
-│   │   └── authentication/
-│   │       ├── github-auth-integration.md
-│   │       ├── google-auth-Integration.md
-│   ├── pages/
-│   │   ├── \[slug].tsx
-│   │   └── docs/
-│   │       └── \[...slug].tsx
-│   ├── stores/
-│   │   └── theme.ts
-│   ├── utils/
-│   │   └── docs.ts
+│   │   │   └── content/
+│   │   │       ├── Content.tsx
+│   │   │       ├── ContentHeader.tsx
+│   │   │       └── ContentLayout.tsx
+│   │   ├── pages/                 # Application pages
+│   │   │   ├── DynamicPage.tsx
+│   │   │   ├── Page.tsx
+│   │   │   ├── PageHeader.tsx
+│   │   │   └── PageSection.tsx
+│   │   └── routes/
+│   │       └── ProtectedRoute.tsx
+│   │
+│   ├── configs/                   # Configuration files (empty)
+│   ├── contexts/                 # React context providers
+│   │   ├── AuthContext.tsx
+│   │   └── ThemeProvider.tsx
+│   └── data/                     # Static data files
+│       ├── app.ts
+│       └── menus.ts
+
 
 ```
 

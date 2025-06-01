@@ -1,5 +1,8 @@
 import * as path from 'path';
-const { getDirectoryStructure, saveDirectoryStructure } = require('./generateStructure');
+//const path = require('path');
+
+import { getDirectoryStructure, saveDirectoryStructure } from './generateStructure';
+
 
 const targetDir = path.resolve(process.argv[2] || '.');
 
