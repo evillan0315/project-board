@@ -1,0 +1,40 @@
+{
+  "name": "project-board",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "build:css": "tailwindcss -i src/styles/global.css -o dist/assets/styles.css",
+    "build:vite": "vite build",
+    "format": "prettier --write \"src/**/*.ts\" \"libs/**/*.ts\"",
+    "start": "vite"
+  },
+  "author": "Eddie Villanueva",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.8",
+    "@types/node": "^22.15.29",
+    "prettier": "3.5.3",
+    "typescript": "5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-react": "^4.0.1",
+    "vite-plugin-solid": "^2.11.6"
+  },
+  "dependencies": {
+    "@iconify-icon/solid": "^3.0.0",
+    "@nanostores/persistent": "^1.0.0",
+    "@nanostores/solid": "^1.0.0",
+    "@solidjs/router": "^0.15.3",
+    "@tailwindcss/vite": "^4.1.8",
+    "apexcharts": "^4.7.0",
+    "autoprefixer": "^10.4.21",
+    "babel-preset-solid": "^1.9.6",
+    "dotenv": "^16.5.0",
+    "marked": "^15.0.12",
+    "solid-apexcharts": "^0.4.0",
+    "solid-js": "^1.9.7",
+    "tailwindcss": "^4.1.8"
+  }
+}

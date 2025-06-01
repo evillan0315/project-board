@@ -1,0 +1,279 @@
+{
+  "type": "directory",
+  "name": "vscode-layout",
+  "contents": [
+    {
+      "type": "file",
+      "name": "README.md"
+    },
+    {
+      "type": "directory",
+      "name": "libs",
+      "contents": [
+        {
+          "type": "file",
+          "name": "generateStructure.ts"
+        },
+        {
+          "type": "file",
+          "name": "generateStructureRunner.ts"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "package.json"
+    },
+    {
+      "type": "file",
+      "name": "pnpm-lock.yaml"
+    },
+    {
+      "type": "directory",
+      "name": "src",
+      "contents": [
+        {
+          "type": "file",
+          "name": "App.tsx"
+        },
+        {
+          "type": "file",
+          "name": "app.css"
+        },
+        {
+          "type": "directory",
+          "name": "components",
+          "contents": [
+            {
+              "type": "file",
+              "name": "Logo.tsx"
+            },
+            {
+              "type": "file",
+              "name": "ThemeToggle.tsx"
+            },
+            {
+              "type": "directory",
+              "name": "layouts",
+              "contents": [
+                {
+                  "type": "file",
+                  "name": "Footer.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "Header.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "Layout.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "LeftSidebar.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "MobileNav.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "Nav.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "RightSidebar.tsx"
+                },
+                {
+                  "type": "directory",
+                  "name": "content",
+                  "contents": [
+                    {
+                      "type": "file",
+                      "name": "Content.tsx"
+                    },
+                    {
+                      "type": "file",
+                      "name": "ContentHeader.tsx"
+                    },
+                    {
+                      "type": "file",
+                      "name": "ContentLayout.tsx"
+                    }
+                  ]
+                },
+                {
+                  "type": "directory",
+                  "name": "react",
+                  "contents": [
+                    {
+                      "type": "file",
+                      "name": "Layout.tsx"
+                    }
+                  ]
+                },
+                {
+                  "type": "directory",
+                  "name": "solid",
+                  "contents": [
+                    {
+                      "type": "file",
+                      "name": "Layout.tsx"
+                    }
+                  ]
+                },
+                {
+                  "type": "file",
+                  "name": "types.ts"
+                }
+              ]
+            },
+            {
+              "type": "directory",
+              "name": "pages",
+              "contents": [
+                {
+                  "type": "file",
+                  "name": "DynamicPage.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "EditorPage.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "Page.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "PageHeader.tsx"
+                },
+                {
+                  "type": "file",
+                  "name": "PageSection.tsx"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "configs",
+          "contents": []
+        },
+        {
+          "type": "directory",
+          "name": "contexts",
+          "contents": [
+            {
+              "type": "file",
+              "name": "AuthContext.ts"
+            },
+            {
+              "type": "file",
+              "name": "ThemeContext.tsx"
+            },
+            {
+              "type": "file",
+              "name": "ThemeProvider.tsx"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "data",
+          "contents": [
+            {
+              "type": "file",
+              "name": "app.ts"
+            },
+            {
+              "type": "file",
+              "name": "menus.ts"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "docs",
+          "contents": [
+            {
+              "type": "directory",
+              "name": "authentication",
+              "contents": [
+                {
+                  "type": "file",
+                  "name": "github-auth-integration.md"
+                },
+                {
+                  "type": "file",
+                  "name": "google-auth-Integration.md"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "index.css"
+        },
+        {
+          "type": "file",
+          "name": "main.tsx"
+        },
+        {
+          "type": "directory",
+          "name": "pages",
+          "contents": [
+            {
+              "type": "file",
+              "name": "[slug].tsx"
+            },
+            {
+              "type": "directory",
+              "name": "docs",
+              "contents": [
+                {
+                  "type": "file",
+                  "name": "[...slug].tsx"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "stores",
+          "contents": [
+            {
+              "type": "file",
+              "name": "theme.ts"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "utils",
+          "contents": [
+            {
+              "type": "file",
+              "name": "docs.ts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "structure.json"
+    },
+    {
+      "type": "file",
+      "name": "tsconfig.json"
+    },
+    {
+      "type": "file",
+      "name": "vite.config.ts"
+    }
+  ]
+}
