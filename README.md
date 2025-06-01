@@ -4,6 +4,14 @@ A developer-focused layout system interface, implemented using TypeScript, Vite,
 
 ---
 
+## 📸 Screenshots
+
+| Login Page | Homepage | Dashboard |
+|------------|----------|-----------|
+| ![Login](./project-board-login.png) | ![Homepage](./homepage-project-board.png) | ![Dashboard](./dashboard-screen.png) |
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -19,8 +27,8 @@ project-board/
 ├── prettier.config.cjs
 │
 ├── dist/                          # Compiled output files
-│   ├── _...slug_-Dt0TiDlw.js
-│   ├── index-G72cJpw_.js
+│   ├── *...slug*-Dt0TiDlw\.js
+│   ├── index-G72cJpw\_.js
 │   ├── index.js
 │   └── vscode-layout.css
 │
@@ -74,7 +82,6 @@ project-board/
 │       ├── app.ts
 │       └── menus.ts
 
-
 ```
 
 ---
@@ -120,31 +127,34 @@ This will create a `structure.json` file representing the current file layout.
 
 Located under `src/docs/authentication/`:
 
-- `google-auth-Integration.md`
-- `github-auth-integration.md`
+* `google-auth-Integration.md`
+* `github-auth-integration.md`
 
 ---
 
 ## 📦 Tooling & Stack
 
-- **Language:** TypeScript
-- **Bundler:** Vite
-- **Frameworks:** React, SolidJS (experimental)
-- **Package Manager:** pnpm
-- **UI:** Tailwind CSS (implied by component naming conventions)
-- **Context Store:** React Context API + custom stores
+* **Language:** TypeScript
+* **Bundler:** Vite
+* **Frameworks:** React, SolidJS (experimental)
+* **Package Manager:** pnpm
+* **UI:** Tailwind CSS
+* **Context Store:** React Context API + custom stores
 
 ---
 
 ## 🛠️ Planned Enhancements
 
-- Populate `configs/` with environment and runtime configs
-- Expand `stores/` and `utils/` for shared logic
-- Support SSR or static builds for docs
-- Extend authentication system
+* Populate `configs/` with environment and runtime configs
+* Expand `stores/` and `utils/` for shared logic
+* Support SSR or static builds for docs
+* Extend authentication system
 
 ---
 
 ## License
 
 MIT – Feel free to use, extend, and contribute.
+
+
+
