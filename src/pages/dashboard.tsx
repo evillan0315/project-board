@@ -1,22 +1,21 @@
-import { createSignal, createEffect, For } from 'solid-js';
-import { useParams, useNavigate, useLocation } from '@solidjs/router';
+import { createSignal, For } from 'solid-js';
+//import { useParams, useNavigate, useLocation } from '@solidjs/router';
 import { SolidApexCharts } from 'solid-apexcharts';
 import { Icon } from '@iconify-icon/solid';
 import MetricCard from '../components/MetricCard';
 export default function Dashboard() {
-  const params = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
+  //const params = useParams();
+  //const navigate = useNavigate();
+  //const location = useLocation();
 
-
-  const [metrics, setMetrics] = createSignal([
+  const [metrics] = createSignal([
     { label: 'Users Online', value: 23, icon: 'mdi:account' },
     { label: 'Server Load', value: '47%', icon: 'mdi:server' },
     { label: 'Active Jobs', value: 12, icon: 'tabler:briefcase' },
     { label: 'Errors Today', value: 0, icon: 'ic:baseline-error-outline' },
   ]);
 
-  const [entries, setEntries] = createSignal([
+  const [entries] = createSignal([
     {
       id: 1,
       title: 'System Status',

@@ -8,13 +8,8 @@ type HeroProps = {
   buttons?: HeroButton[];
 };
 
-
-
 const Hero = (props: HeroProps): JSX.Element => {
   const isAuthenticated = () => !!props.user;
-
-
-
   const shouldRenderButton = (btn: HeroButton) => {
     if (btn.showWhen === "authenticated") return isAuthenticated();
     if (btn.showWhen === "unauthenticated") return !isAuthenticated();

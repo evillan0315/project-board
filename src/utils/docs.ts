@@ -6,7 +6,6 @@ export const docs = import.meta.glob('/src/docs/**/*.md', {
   import: 'default',
 });
 
-
 export function getDocSlugs(): string[] {
   return Object.keys(docs)
     .map((filePath) => {
@@ -27,4 +26,3 @@ export function getDocContent(slug: string): string | null {
   // console.log(matchingKey, 'matched key'); // Optional debug
   return docs[matchingKey] as string;
 }
-

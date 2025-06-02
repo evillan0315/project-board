@@ -1,3 +1,4 @@
 export const menus = [
-  { slug: 'editor', title: 'Editor', subTitle: 'Get in touch with us.', show: true }
+  { slug: 'privacy', title: 'Privacy Policy', subTitle: 'Privacy  Policy.', show: false },
+  { slug: 'terms', title: 'Terms & Conditions', subTitle: 'Terms & Conditions', show: false },
 ];

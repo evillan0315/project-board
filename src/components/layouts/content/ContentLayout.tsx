@@ -11,7 +11,7 @@ interface ContentLayoutProps {
 
 export default function ContentLayout({ content, header, classNames = '' }: ContentLayoutProps) {
   return (
-    <div class={`flex-grow overflow-auto p-4 ${classNames}`}>
+    <div class={`flex-grow ${classNames}`}>
       {header &&
         (typeof header === 'object' && 'title' in header ? (
           <ContentHeader title={header.title} subTitle={header.subTitle} />

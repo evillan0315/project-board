@@ -6,6 +6,7 @@ import RightSidebar from './RightSidebar';
 import ContentLayout from './content/ContentLayout';
 import type { MenuItem } from "./types";
 
+
 interface LayoutProps {
   title: string;
   menus: MenuItem[];
@@ -18,7 +19,7 @@ interface LayoutProps {
 export default function Layout({ title, menus, content, leftSidebar = false, rightSidebar = false, footer = true }: LayoutProps) {
   return (
     <div class="flex flex-col min-h-screen">
-      <Header title={title} menus={menus} />
+      <Header />
       <div class="flex flex-1">
         <Show when={leftSidebar}>
           <LeftSidebar />

@@ -12,10 +12,12 @@ import { company } from './data/app';
 import DocPageList from './components/docs/DocPageList';
 import Home from './pages/home';
 import Dashboard from './pages/dashboard';
+import Editor from './pages/editor';
 import DynamicPage from './components/pages/DynamicPage';
 import { getDocSlugs } from './utils/docs';
 import LoginForm from './components/LoginForm';
 
+import Toaster from './components/Toaster';
 
 //import DocsPage from './pages/docs/[...slug]';
 const fetchRoutes = async () => [];
@@ -28,6 +30,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
+      <Toaster />
       <AuthProvider> {/* ✅ Wrap everything with AuthProvider */}
         <Router
           root={(props) => (
@@ -41,6 +44,7 @@ export default function App() {
           <Route path="/" component={Home} />
           <Route path="/docs" component={DocPageList} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/editor" component={Editor} />
           <Show when={menus}>
             <For each={menus}>
               {(page) => (

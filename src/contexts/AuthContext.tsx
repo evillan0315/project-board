@@ -8,7 +8,7 @@ import {
   type Accessor,
 } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { useNavigate } from '@solidjs/router';
+
 interface User {
   token?: string;
   name?: string;

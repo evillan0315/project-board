@@ -1,9 +1,9 @@
 import { createSignal, onMount } from 'solid-js';
 import { Icon } from '@iconify-icon/solid';
 
-const BASE_URL = import.meta.env.BASE_URL;
+//const BASE_URL = import.meta.env.BASE_URL;
 const REDIRECT_URI = import.meta.env.GOOGLE_CALLBACK_URL;
-const LOGIN_URI = '';
+
 export default function SignInWithGoogle() {
   const [loginUrl, setLoginUrl] = createSignal('');
 

@@ -3,7 +3,6 @@ import * as path from 'path';
 
 import { getDirectoryStructure, saveDirectoryStructure } from './generateStructure';
 
-
 const targetDir = path.resolve(process.argv[2] || '.');
 
 const excludeFolders = ['node_modules', '.git'];

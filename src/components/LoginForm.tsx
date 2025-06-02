@@ -21,13 +21,16 @@ const LoginForm = () => {
 
     try {
       const response = await login({ email: username(), password: password() });
-
-      if (response && response.accessToken) {
+      if(!response) {
+        setError('Login failed');
+      	throw new Error('Invalid login response');
+      }
+      if (response?.accessToken) {
         // Optionally store token in localStorage/sessionStorage or context
         // localStorage.setItem('token', response.access_token);
         navigate('/dashboard');
       } else {
-        throw new Error('Invalid login response');
+        throw new Error('No access token available');
       }
     } catch (err) {
       setError((err as Error).message || 'Login failed');

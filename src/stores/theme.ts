@@ -27,4 +27,3 @@ export function toggleTheme() {
   const current = theme.get();
   theme.set(current === 'dark' ? 'light' : 'dark');
 }
-

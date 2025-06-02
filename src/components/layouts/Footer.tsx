@@ -11,7 +11,7 @@ const Footer = (props: FooterProps) => {
 
       <footer class="sticky bottom-0 z-50 bg-gray-100 text-white py-1 flex gap-4 justify-between items-center border-t dark:border-gray-700 dark:bg-gray-900 px-4">
         
-          <p>© 2025 Project Board. All rights reserved.</p>
+          <p>© 2025 {company.name}. All rights reserved.</p>
           <nav class="lg:flex lg:gap-x-12">
 
         <For each={props.links}>
