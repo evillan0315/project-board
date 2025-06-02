@@ -143,7 +143,7 @@ Located under `src/docs/authentication/`:
 
 ---
 
-# 🧠 Developer Workspace – Editor & Text-to-Speech Suite
+## 🧠 Developer Workspace – Editor & Text-to-Speech Suite
 
 Welcome to the **Developer Workspace**, a robust, web-based IDE and communication toolkit built with **SolidJS**, **Tailwind CSS**, and **Node/NestJS** backend services. This suite combines a powerful file editor and terminal interface with an interactive **Text-to-Speech (TTS)** engine to help you code, test, and communicate faster.
 
