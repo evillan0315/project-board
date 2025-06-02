@@ -6,9 +6,11 @@ import ThemeProvider from './contexts/ThemeProvider';
 
 const root = document.getElementById('app');
 
-render(() => (
-   <ThemeProvider>
+render(
+  () => (
+    <ThemeProvider>
       <App />
     </ThemeProvider>
-), root!);
-
+  ),
+  root!,
+);

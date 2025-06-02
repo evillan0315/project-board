@@ -10,7 +10,7 @@ export function getTheme(theme: 'light' | 'dark') {
 const tailwindDarkTheme = EditorView.theme(
   {
     '&': {
-      backgroundColor: '#171717',
+      backgroundColor: '#030712',
       height: '100%',
       color: '#f5f5f5',
     },
@@ -24,7 +24,7 @@ const tailwindDarkTheme = EditorView.theme(
       backgroundColor: '#3f3f46',
     },
     '.cm-gutters': {
-      backgroundColor: '#171717',
+      backgroundColor: '#030712',
       color: '#a3a3a3',
       border: 'none',
     },

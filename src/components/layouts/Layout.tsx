@@ -4,8 +4,7 @@ import Footer from './Footer';
 import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
 import ContentLayout from './content/ContentLayout';
-import type { MenuItem } from "./types";
-
+import type { MenuItem } from './types';
 
 interface LayoutProps {
   title: string;
@@ -16,11 +15,19 @@ interface LayoutProps {
   footer?: boolean;
 }
 
-export default function Layout({ title, menus, content, leftSidebar = false, rightSidebar = false, footer = true }: LayoutProps) {
+export default function Layout({
+  title,
+  menus,
+  content,
+  leftSidebar = false,
+  rightSidebar = false,
+  footer = true,
+}: LayoutProps) {
   return (
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col h-[calc(100vh)] overflow-hidden">
       <Header />
-      <div class="flex flex-1">
+
+      <div class="flex flex-1 overflow-auto">
         <Show when={leftSidebar}>
           <LeftSidebar />
         </Show>
@@ -29,10 +36,10 @@ export default function Layout({ title, menus, content, leftSidebar = false, rig
           <RightSidebar />
         </Show>
       </div>
+
       <Show when={footer}>
         <Footer links={menus} />
       </Show>
     </div>
   );
 }
-

@@ -1,11 +1,11 @@
 // src/components/docs/DocPageList.tsx
 import { For } from 'solid-js';
 import { A } from '@solidjs/router';
-import { getDocSlugs }  from '../../utils/docs';
+import { getDocSlugs } from '../../utils/docs';
 
 export default function DocPageList() {
   const slugs = getDocSlugs();
-  
+
   return (
     <div class="p-6 max-w-3xl">
       <h1 class="text-2xl font-bold mb-4">Documentations</h1>
@@ -13,10 +13,7 @@ export default function DocPageList() {
         <For each={slugs}>
           {(slug) => (
             <li>
-              <A
-                href={`/docs/${slug}`}
-                class="text-blue-600 hover:underline"
-              >
+              <A href={`/docs/${slug}`} class="text-blue-600 hover:underline">
                 {slug}
               </A>
             </li>
@@ -26,4 +23,3 @@ export default function DocPageList() {
     </div>
   );
 }
-

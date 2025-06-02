@@ -1,13 +1,7 @@
 // src/contexts/AuthContext.ts
-import {
-  createContext,
-  useContext,
-  createSignal,
-  onMount,
-  type JSX,
-  type Accessor,
-} from 'solid-js';
+import { createContext, useContext, createSignal, onMount, type JSX, type Accessor } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import api from '../services/api';
 
 interface User {
   token?: string;
@@ -29,7 +23,7 @@ const AuthContext = createContext<AuthContextValue>();
 export const AuthProvider = (props: { children: JSX.Element }) => {
   const [isAuthenticated, setIsAuthenticated] = createSignal<boolean>(false);
   const [user, setUser] = createStore<User>({});
-  
+
   // Restore session on mount
   onMount(() => {
     const token = localStorage.getItem('token');
@@ -49,44 +43,26 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
   });
 
   const login = async (credentials: { email: string; password: string }) => {
-    const response = await fetch('https://board-api.duckdns.org/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(credentials),
-    });
-
-    if (!response.ok) throw new Error('Login failed');
-
-    const data = await response.json();
+    const response = await api.post('/auth/login', credentials);
+    if (!response.data) throw new Error('Login failed');
+    const data = await response.data;
     localStorage.setItem('token', data.accessToken);
-
-    const userResponse = await fetch('https://board-api.duckdns.org/api/auth/me', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${data.accessToken}`,
-      },
-      credentials: 'include',
-    });
-
-    if (!userResponse.ok) throw new Error('Failed to fetch user');
-
-    const userData = await userResponse.json();
-    setUser({ ...userData, token: data.accessToken });
+    const userData = await data.user;
+    setUser({ ...data, token: data.accessToken });
     localStorage.setItem('user', JSON.stringify(userData));
-
     setIsAuthenticated(true);
-    return {accessToken: data.accessToken}
+    //return { accessToken: data.accessToken };
   };
 
   const logout = async () => {
-    const logoutResponse = await fetch('https://board-api.duckdns.org/api/auth/logout', {
+    /*const response = await api.post('/auth/login');
+    const logoutResponse = await fetch('http://localhost:5000/api/auth/logout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include'
+      credentials: 'include',
     });
     if (!logoutResponse.ok) throw new Error('Failed to logout user');
-
+*/
     //const userData = await userResponse.json();
     setUser({});
     setIsAuthenticated(false);
@@ -106,4 +82,3 @@ export const useAuth = () => {
   if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
   return ctx;
 };
-

@@ -4,7 +4,7 @@ import { toasts } from '../stores/toast';
 
 export default function Toaster() {
   return (
-    <div class="fixed top-4 right-4 space-y-2 z-50">
+    <div class="fixed top-10 right-10 space-y-2 z-50">
       <For each={toasts()}>
         {(toast) => (
           <div

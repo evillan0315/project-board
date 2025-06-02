@@ -45,10 +45,10 @@ export default function Dashboard() {
     },
     xaxis: {
       categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-      labels: { style: {  } }, // Tailwind text-neutral-400 for axis labels
+      labels: { style: {} }, // Tailwind text-neutral-400 for axis labels
     },
     yaxis: {
-      labels: { style: {  } },
+      labels: { style: {} },
     },
     stroke: {
       curve: 'smooth',
@@ -134,11 +134,7 @@ export default function Dashboard() {
         </h1>
         {/* Metrics Cards */}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 mt-4">
-          <For each={metrics()}>
-            {(metric) => (
-            <MetricCard {...metric} />
-            )}
-          </For>
+          <For each={metrics()}>{(metric) => <MetricCard {...metric} />}</For>
         </div>
 
         <div class="grid grid-cols-1 gap-4 px-4 mt-4">
@@ -188,8 +184,8 @@ export default function Dashboard() {
         {/* Apps section */}
         <div class="grid grid-cols-1 px-4 mt-4">
           <h2 class="leading-0 uppercase tracking-widest text-xl mt-6 mb-10 ">
-          <b>App</b>lications
-        </h2>
+            <b>App</b>lications
+          </h2>
           <div class="flex space-x-6">
             {/* Editor */}
             <button
@@ -216,7 +212,6 @@ export default function Dashboard() {
               class="flex flex-col items-center justify-center  border dark:border-gray-900  p-4 rounded-2xl shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
               onClick={() => (window.location.href = '/terminal')}
               aria-label="Open Terminal"
-              
             >
               <Icon icon="mdi:console" width="50" height="50" class="text-sky-500 shrink-0" />
               Terminal

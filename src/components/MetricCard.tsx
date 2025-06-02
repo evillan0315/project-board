@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js";
+import type { JSX } from 'solid-js';
 import { Icon } from '@iconify-icon/solid';
 
 type MetricCardProps = {
@@ -7,9 +7,9 @@ type MetricCardProps = {
   value: string | number;
 };
 
-const MetricCard = (props: MetricCardProps): JSX.Element =>  {
+const MetricCard = (props: MetricCardProps): JSX.Element => {
   return (
-    <div class="rounded-2xl px-4 py-8 shadow-md flex items-center space-x-4 border border-gray-900">
+    <div class="rounded-2xl px-4 py-8 shadow-md flex items-center space-x-4 border">
       <Icon icon={props.icon} width="50" height="50" class="text-sky-500 shrink-0" />
       <div class="flex flex-col">
         <span class="text-lg">{props.label}</span>
@@ -20,4 +20,3 @@ const MetricCard = (props: MetricCardProps): JSX.Element =>  {
 };
 
 export default MetricCard;
-

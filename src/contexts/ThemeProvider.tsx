@@ -28,4 +28,3 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   return props.children;
 }
-

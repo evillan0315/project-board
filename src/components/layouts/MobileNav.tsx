@@ -1,10 +1,9 @@
 // src/components/layouts/MobileNav.tsx
 import { For, Show } from 'solid-js';
 import { useAuth } from '../../contexts/AuthContext';
-import { menus  } from '../../data/menus';
+import { menus } from '../../data/menus';
 import { company } from '../../data/app';
 import Logo from '../Logo';
-
 
 const MobileNav = () => {
   const { isAuthenticated } = useAuth();
@@ -34,14 +33,14 @@ const MobileNav = () => {
             <div class="space-y-2 py-6">
               <For each={menus}>
                 {(menu) => (
-                <Show when={menu.show}>
-                  <a
-                   href={menu.slug === 'home' ? '/' : `/${menu.slug}`}
-                    title={menu.title}
-                    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    {menu.title}
-                  </a>
+                  <Show when={menu.show}>
+                    <a
+                      href={menu.slug === 'home' ? '/' : `/${menu.slug}`}
+                      title={menu.title}
+                      class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      {menu.title}
+                    </a>
                   </Show>
                 )}
               </For>
@@ -49,7 +48,6 @@ const MobileNav = () => {
 
             <Show when={!isAuthenticated()}>
               <div class="py-6">
-              
                 <a
                   href="/login"
                   class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"

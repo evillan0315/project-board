@@ -12,10 +12,5 @@ export default function ProtectedRoute(props: { children: JSX.Element }) {
     return null;
   }
 
-  return (
-    <Show when={isAuthenticated()}>
-      {props.children}
-    </Show>
-  );
+  return <Show when={isAuthenticated()}>{props.children}</Show>;
 }
-

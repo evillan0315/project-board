@@ -1,5 +1,5 @@
 // src/components/Editor.tsx
-import { createSignal, onMount, onCleanup, createEffect} from 'solid-js';
+import { createSignal, onMount, onCleanup, createEffect } from 'solid-js';
 import type { JSX } from 'solid-js';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
@@ -14,11 +14,12 @@ import { getThemeExtension } from '../utils/editorTheme';
 import { showToast } from '../stores/toast';
 
 interface CodeEditorWithAPIProps {
+  param?: 'url' | 'filePath';
   filePath: string;
   theme?: 'light' | 'dark';
   content?: string;
 }
-const Editor = (props: CodeEditorWithAPIProps): JSX.Element =>  {
+export const Editor = (props: CodeEditorWithAPIProps): JSX.Element => {
   let editorContainer: HTMLDivElement | undefined;
   let editorView: EditorView | null = null;
 
@@ -31,7 +32,7 @@ const Editor = (props: CodeEditorWithAPIProps): JSX.Element =>  {
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append('filePath', props.filePath);
+      formData.append(props.param ? props.param : 'filePath', props.filePath);
       const response = await api.post('/file/read', formData);
       if (!response.data?.data) throw new Error('Failed to load file');
 
@@ -107,11 +108,11 @@ const Editor = (props: CodeEditorWithAPIProps): JSX.Element =>  {
   return (
     <div class="h-full relative">
       <div class="absolute top-0 right-0 z-10 w-full">
-        <div class="flex justify-between align-center">
-          <div class="mb-1">
+        <div class="flex justify-between align-center bg-gray-900">
+          <div class="">
             <button
               title={props.filePath}
-              class="flex cursor-alias items-center gap-4 px-4 pb-2 pt-1 mt-1 bg-neutral-900 text-left text-neutral-800 dark:text-neutral-200 dark:hover:text-yellow-500 rounded-t-lg border-l border-t  border-neutral-700"
+              class="flex cursor-alias items-center gap-4 px-4 pb-2 pt-1 mt-1 bg-gray-950 text-left text-neutral-800 dark:text-neutral-200 dark:hover:text-sky-500 rounded-t-lg ml-1"
             >
               {() => props.filePath?.split('/').pop()} <Icon icon="mdi:close" width="18" height="18" />
             </button>
@@ -134,9 +135,7 @@ const Editor = (props: CodeEditorWithAPIProps): JSX.Element =>  {
       {loading() && <Loading />}
       {error() && <p class="text-red-600 p-4">{error()}</p>}
 
-      <div ref={editorContainer} class="h-full w-full pt-10" />
+      <div ref={editorContainer} class="h-full pt-10" />
     </div>
   );
 };
-
-export default Editor;
