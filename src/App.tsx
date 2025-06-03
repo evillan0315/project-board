@@ -13,6 +13,8 @@ import Home from './pages/home';
 import Dashboard from './pages/dashboard';
 import Editor from './pages/editor';
 import TTSForm from './pages/tts';
+import Downloader from './pages/downloader';
+
 import DynamicPage from './components/pages/DynamicPage';
 import { getDocSlugs } from './utils/docs';
 import LoginForm from './components/LoginForm';
@@ -44,6 +46,7 @@ export default function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/editor" component={Editor} />
           <Route path="/tts" component={TTSForm} />
+          <Route path="/downloader" component={Downloader} />
           {/**<Show when={menus}>
             <For each={menus}>
               {(page) => (

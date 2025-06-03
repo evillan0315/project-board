@@ -107,110 +107,110 @@ export default function Home() {
           />
         </section>
 
-        
-       {/* Editor Features Section */}
-<section class="mt-20 max-w-5xl mx-auto text-center">
-  <h2 class="text-3xl font-bold mb-2">Powerful Editor Features</h2>
-  <p class="text-lg text-gray-600 dark:text-gray-400 mb-10">
-    Designed to feel like a full IDE in the browser, our editor provides a seamless development experience — complete with file navigation, in-browser coding, and an integrated terminal.
-  </p>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-    <FeatureCard
-      icon="mdi:file-code-outline"
-      title="Integrated Code Editor"
-      description="Edit your files with a fast, Monaco-based editor tailored for developers."
-    />
-    <FeatureCard
-      icon="mdi:file-tree"
-      title="File Manager"
-      description="Navigate your project structure easily with a dynamic file explorer."
-    />
-    <FeatureCard
-      icon="mdi:resize"
-      title="Resizable Panels"
-      description="Adjust the editor and sidebar layout with flexible drag-to-resize functionality."
-    />
-    <FeatureCard
-      icon="mdi:console"
-      title="Embedded Terminal"
-      description="Run commands and interact with your environment directly in the terminal drawer."
-    />
-    <FeatureCard
-      icon="mdi:theme-light-dark"
-      title="Theme & UX Enhancements"
-      description="Customizable themes, smooth transitions, and IDE-like experience."
-    />
-    <FeatureCard
-      icon="mdi:update"
-      title="Live Layout Updates"
-      description="Responsive design with real-time layout adjustment support."
-    />
-  </div>
-</section>
-{/* Developer Tools Hero Section */}
-<section class="mt-24 mb-20 px-6 md:px-12 lg:px-24 text-center">
-  <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-    Build. Edit. Speak.
-  </h2>
-  <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
-    From a powerful, resizable code editor to an intelligent text-to-speech engine, our platform gives you everything you need to create, communicate, and deploy content faster than ever.
-  </p>
-  <div class="flex justify-center gap-4 flex-wrap">
-    <a
-      href="/editor"
-      class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-6 rounded-md transition"
-    >
-      Launch Editor
-    </a>
-    <a
-      href="/tts"
-      class="border border-sky-600 text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-gray-800 font-semibold py-2 px-6 rounded-md transition"
-    >
-      Try Text-to-Speech
-    </a>
-  </div>
-</section>
-{/* Text-to-Speech Section */}
-<section class="mt-20 max-w-5xl mx-auto text-center">
-  <h2 class="text-3xl font-bold mb-2">Text-to-Speech Generator</h2>
-  <p class="text-lg text-gray-600 dark:text-gray-400 mb-10">
-    Generate realistic speech from text with support for multiple languages and custom voice profiles. Perfect for narration, accessibility, and voice-driven applications.
-  </p>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-    <FeatureCard
-      icon="mdi:text-to-speech"
-      title="Multilingual Input"
-      description="Supports over 20 languages and regional accents using standardized language codes."
-    />
-    <FeatureCard
-      icon="mdi:account-voice"
-      title="Custom Voice Profiles"
-      description="Define multiple speakers with distinct voices and tones like Bright, Smooth, or Informative."
-    />
-    <FeatureCard
-      icon="mdi:music-note"
-      title="Real-Time Playback"
-      description="Instantly listen to generated speech and download high-quality audio files."
-    />
-    <FeatureCard
-      icon="mdi:form-textbox"
-      title="Interactive Form"
-      description="Dynamic speaker fields, inline validation, and easy-to-use controls built with SolidJS."
-    />
-    <FeatureCard
-      icon="mdi:api"
-      title="API Powered"
-      description="Backed by a robust REST API for reliable, scalable TTS generation and playback."
-    />
-    <FeatureCard
-      icon="mdi:progress-clock"
-      title="Future Enhancements"
-      description="Plans include WebSocket streaming, sample previews, and enhanced customization."
-    />
-  </div>
-</section>
+        {/* Editor Features Section */}
+        <section class="mt-20 max-w-5xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-2">Powerful Editor Features</h2>
+          <p class="text-lg text-gray-600 dark:text-gray-400 mb-10">
+            Designed to feel like a full IDE in the browser, our editor provides a seamless development experience —
+            complete with file navigation, in-browser coding, and an integrated terminal.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            <FeatureCard
+              icon="mdi:file-code-outline"
+              title="Integrated Code Editor"
+              description="Edit your files with a fast, Monaco-based editor tailored for developers."
+            />
+            <FeatureCard
+              icon="mdi:file-tree"
+              title="File Manager"
+              description="Navigate your project structure easily with a dynamic file explorer."
+            />
+            <FeatureCard
+              icon="mdi:resize"
+              title="Resizable Panels"
+              description="Adjust the editor and sidebar layout with flexible drag-to-resize functionality."
+            />
+            <FeatureCard
+              icon="mdi:console"
+              title="Embedded Terminal"
+              description="Run commands and interact with your environment directly in the terminal drawer."
+            />
+            <FeatureCard
+              icon="mdi:theme-light-dark"
+              title="Theme & UX Enhancements"
+              description="Customizable themes, smooth transitions, and IDE-like experience."
+            />
+            <FeatureCard
+              icon="mdi:update"
+              title="Live Layout Updates"
+              description="Responsive design with real-time layout adjustment support."
+            />
+          </div>
+        </section>
+        {/* Developer Tools Hero Section */}
+        <section class="mt-24 mb-20 px-6 md:px-12 lg:px-24 text-center">
+          <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Build. Edit. Speak.</h2>
+          <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
+            From a powerful, resizable code editor to an intelligent text-to-speech engine, our platform gives you
+            everything you need to create, communicate, and deploy content faster than ever.
+          </p>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <a
+              href="/editor"
+              class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-6 rounded-md transition"
+            >
+              Launch Editor
+            </a>
+            <a
+              href="/tts"
+              class="border border-sky-600 text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-gray-800 font-semibold py-2 px-6 rounded-md transition"
+            >
+              Try Text-to-Speech
+            </a>
+          </div>
+        </section>
+        {/* Text-to-Speech Section */}
+        <section class="mt-20 max-w-5xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-2">Text-to-Speech Generator</h2>
+          <p class="text-lg text-gray-600 dark:text-gray-400 mb-10">
+            Generate realistic speech from text with support for multiple languages and custom voice profiles. Perfect
+            for narration, accessibility, and voice-driven applications.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            <FeatureCard
+              icon="mdi:text-to-speech"
+              title="Multilingual Input"
+              description="Supports over 20 languages and regional accents using standardized language codes."
+            />
+            <FeatureCard
+              icon="mdi:account-voice"
+              title="Custom Voice Profiles"
+              description="Define multiple speakers with distinct voices and tones like Bright, Smooth, or Informative."
+            />
+            <FeatureCard
+              icon="mdi:music-note"
+              title="Real-Time Playback"
+              description="Instantly listen to generated speech and download high-quality audio files."
+            />
+            <FeatureCard
+              icon="mdi:form-textbox"
+              title="Interactive Form"
+              description="Dynamic speaker fields, inline validation, and easy-to-use controls built with SolidJS."
+            />
+            <FeatureCard
+              icon="mdi:api"
+              title="API Powered"
+              description="Backed by a robust REST API for reliable, scalable TTS generation and playback."
+            />
+            <FeatureCard
+              icon="mdi:progress-clock"
+              title="Future Enhancements"
+              description="Plans include WebSocket streaming, sample previews, and enhanced customization."
+            />
+          </div>
+        </section>
 
-{/* Testimonials Section */}
+        {/* Testimonials Section */}
         <section class="mt-20 max-w-3xl mx-auto">
           <h2 class="text-3xl font-bold text-center mb-8">What Our Users Say</h2>
           <div class="relative border rounded-lg p-8 shadow-md">

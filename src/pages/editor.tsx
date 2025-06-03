@@ -115,14 +115,14 @@ export default function Editor() {
       {/* File Manager Panel */}
       <div class="flex min-h-0 min-w-0 flex-col overflow-auto relative" style={`flex: ${left()}`}>
         <div class="fixed top-12 left-0 right-0 z-10 w-full border-b border-gray-900 bg-gray-950 ">
-            <div class="flex justify-between align-center">
-              <div>
-                <button class="flex cursor-alias items-center gap-2 px-2 py-1 text-left text-neutral-800 dark:text-neutral-200 dark:hover:text-yellow-500 text-sm uppercase tracking-widest">
-                  <Icon icon="mdi:file" width="22" height="22" /> File Explorer
-                </button>
-              </div>
+          <div class="flex justify-between align-center">
+            <div>
+              <button class="flex cursor-alias items-center gap-2 px-2 py-1 text-left text-neutral-800 dark:text-neutral-200 dark:hover:text-yellow-500 text-sm uppercase tracking-widest">
+                <Icon icon="mdi:file" width="22" height="22" /> File Explorer
+              </button>
             </div>
           </div>
+        </div>
         <div class="pb-4 pt-12">
           <FileManager onFileSelect={loadFile} />
         </div>
@@ -133,23 +133,11 @@ export default function Editor() {
 
       {/* Code Editor Panel */}
       <div class="flex min-h-0 min-w-0 flex-col overflow-auto pt-9" style={`flex: ${1 - left()}`}>
-        <EditorComponent
-          theme="dark"
-          filePath={filePath()}
-          content={fileContent()}
-          language="typescript"
-        />
+        <EditorComponent theme="dark" filePath={filePath()} content={fileContent()} language="typescript" />
       </div>
 
       {/* Integrated Terminal Drawer */}
-      <TerminalDrawer
-        position="bottom"
-        size="200px"
-        fontSize="12"
-        resizable={true}
-        draggable={false}
-      />
+      <TerminalDrawer position="bottom" size="200px" fontSize="12" resizable={true} draggable={false} />
     </div>
   );
 }
-

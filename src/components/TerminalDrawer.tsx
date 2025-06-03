@@ -57,32 +57,29 @@ function TerminalDrawer(props: TerminalDrawerProps) {
           style={`${sizeStyle()}; font-size: ${props.fontSize ?? '14px'};`}
         >
           <button
-                  onClick={()=>setIsOpen(false)}
-                  aria-label="Close Drawer"
-                  class="absolute -top-8 right-2 rounded-md p-1 cursor-alias focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:focus:ring-indigo-400"
-                >
-                  <svg
-                    class="h-5 w-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  {/**<Icon icon="mdi:code-greater-than-or-equal" width="2.2em" height="2.2em"  />**/}
-                </button>
-          <TerminalShell fontSize={props.fontSize}/>
+            onClick={() => setIsOpen(false)}
+            aria-label="Close Drawer"
+            class="absolute -top-8 right-2 rounded-md p-1 cursor-alias focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:focus:ring-indigo-400"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            {/**<Icon icon="mdi:code-greater-than-or-equal" width="2.2em" height="2.2em"  />**/}
+          </button>
+          <TerminalShell fontSize={props.fontSize} />
         </div>
       </Show>
 
-      <button
-        onClick={() => setIsOpen(!isOpen())}
-        class="fixed -bottom-2 right-2 p-2 z-60 shadow-lg cursor-pointer"
-      >
-        <Icon icon="mdi:code-greater-than-or-equal" width="1.4em" height="1.4em"  />
+      <button onClick={() => setIsOpen(!isOpen())} class="fixed -bottom-2 right-2 p-2 z-60 shadow-lg cursor-pointer">
+        <Icon icon="mdi:code-greater-than-or-equal" width="1.4em" height="1.4em" />
       </button>
     </>
   );

@@ -2,7 +2,7 @@ import { createSignal, onCleanup, onMount } from 'solid-js';
 import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { io, Socket } from 'socket.io-client';
-import 'xterm/css/xterm.css';
+//import 'xterm/css/xterm.css';
 
 interface TerminalShellProps {
   fontSize?: number;
@@ -125,7 +125,7 @@ export default function TerminalShell(props: TerminalShellProps) {
       console.log('[✔] Terminal connected');
       termInstance.writeln('Welcome to Terminal');
       termInstance.writeln('');
-      handleCommand('osinfo')
+      handleCommand('osinfo');
       prompt();
     });
 
@@ -152,12 +152,7 @@ export default function TerminalShell(props: TerminalShellProps) {
 
   return (
     <div class="p-2 h-full">
-      <div
-        ref={el => (terminalRef = el)}
-        class="h-full focus:outline-none"
-        tabindex="0"
-      />
+      <div ref={(el) => (terminalRef = el)} class="h-full focus:outline-none" tabindex="0" />
     </div>
   );
 }
-
