@@ -1,12 +1,8 @@
 import { createSignal, For } from 'solid-js';
-//import { useParams, useNavigate, useLocation } from '@solidjs/router';
 import { SolidApexCharts } from 'solid-apexcharts';
 import { Icon } from '@iconify-icon/solid';
 import MetricCard from '../components/MetricCard';
 export default function Dashboard() {
-  //const params = useParams();
-  //const navigate = useNavigate();
-  //const location = useLocation();
 
   const [metrics] = createSignal([
     { label: 'Users Online', value: 23, icon: 'mdi:account' },
@@ -36,94 +32,7 @@ export default function Dashboard() {
     },
   ]);
 
-  const chartOptions = {
-    chart: {
-      type: 'line',
-      toolbar: { show: false },
-      zoom: { enabled: false },
-      background: '#030712', // bg-neutral-900 hex value
-    },
-    xaxis: {
-      categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-      labels: { style: {} }, // Tailwind text-neutral-400 for axis labels
-    },
-    yaxis: {
-      labels: { style: {} },
-    },
-    stroke: {
-      curve: 'smooth',
-      //colors: ['#3B82F6'], // Tailwind blue-500 for line color
-    },
-
-    grid: {
-      borderColor: '#374151', // Tailwind neutral-700 for grid lines
-    },
-  };
-
-  const chartSeries = [
-    {
-      name: 'Active Users',
-      data: [10, 41, 35, 51, 49],
-    },
-  ];
-
-  const lineChartOptions = {
-    chart: {
-      id: 'line-chart',
-      toolbar: { show: false },
-      background: '#030712', // bg-neutral-900 hex value
-    },
-    xaxis: {
-      categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    stroke: {
-      curve: 'smooth',
-      width: 3,
-    },
-    theme: {
-      mode: 'dark',
-    },
-    //colors: ['#4F46E5'], // Indigo-600
-    tooltip: {
-      enabled: true,
-    },
-  };
-
-  const lineChartSeries = [
-    {
-      name: 'Active Users',
-      data: [30, 40, 35, 50, 49, 60, 70],
-    },
-  ];
-
-  // Sample data for bar chart
-  const barChartOptions = {
-    chart: {
-      id: 'bar-chart',
-      toolbar: { show: false },
-      background: '#030712',
-    },
-    xaxis: {
-      categories: ['Q1', 'Q2', 'Q3', 'Q4'],
-    },
-    //colors: ['#22C55E'], // Green-500
-    plotOptions: {
-      bar: {
-        borderRadius: 6,
-        columnWidth: '45%',
-      },
-    },
-    tooltip: {
-      enabled: true,
-    },
-  };
-
-  const barChartSeries = [
-    {
-      name: 'Sales',
-      data: [15000, 20000, 18000, 22000],
-    },
-  ];
+  
 
   return (
     <div class="flex flex-col max-w-7xl mx-auto">
@@ -137,35 +46,8 @@ export default function Dashboard() {
           <For each={metrics()}>{(metric) => <MetricCard {...metric} />}</For>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 px-4 mt-4">
-          <div class=" border dark:border-gray-900 bg-gray-950 p-6 rounded-2xl shadow-md">
-            <h2 class="font-semibold text-lg mb-4">Bar Activity Chart</h2>
-            <SolidApexCharts options={chartOptions} series={chartSeries} type="bar" height={250} class="rounded-2xl" />
-          </div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-4 mt-4">
-          {/* Existing charts */}
-          <div class=" border dark:border-gray-900 bg-gray-950 p-6 rounded-2xl shadow-md">
-            <h2 class="font-semibold text-lg mb-4">Weekly Active Users</h2>
-            <SolidApexCharts
-              options={lineChartOptions}
-              series={lineChartSeries}
-              type="line"
-              height={250}
-              class="rounded-2xl"
-            />
-          </div>
-          <div class=" border dark:border-gray-900 bg-gray-950 p-6 rounded-2xl shadow-md">
-            <h2 class="font-semibold text-lg mb-4">Quarterly Sales</h2>
-            <SolidApexCharts
-              options={barChartOptions}
-              series={barChartSeries}
-              type="bar"
-              height={250}
-              class="rounded-2xl"
-            />
-          </div>
-        </div>
+
+        
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 mt-4">
           <For each={entries()}>

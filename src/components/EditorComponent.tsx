@@ -12,7 +12,7 @@ import api from '../services/api';
 import { showToast } from '../stores/toast';
 
 type EditorComponentProps = {
-  param: 'url' | 'filePath';
+  param?: 'url' | 'filePath';
   filePath: string;
   theme?: 'light' | 'dark';
   content?: string;

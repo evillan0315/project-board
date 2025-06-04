@@ -2,7 +2,7 @@ import { createSignal, onCleanup, onMount } from 'solid-js';
 import io from 'socket.io-client';
 import { Icon } from '@iconify-icon/solid';
 import { Button } from './ui/Button';
-const socket = io('http://localhost:5000'); // Adjust if hosted elsewhere
+const socket = io('https://board-api.duckdns.org'); // Adjust if hosted elsewhere
 
 export default function AudioDownloader() {
   const [url, setUrl] = createSignal('');
@@ -47,14 +47,10 @@ export default function AudioDownloader() {
         value={url()}
         onInput={(e) => setUrl(e.currentTarget.value)}
       />
-      <Button
-              class="w-full flex items-center gap-2 px-2 py-2 uppercase tracking-widest"
-              onClick={handleSubmit}
-
-            >
-              <Icon icon="mdi:download" width="2.2em" height="2.2em" />
-              Download
-            </Button>
+      <Button class="w-full flex items-center gap-2 px-2 py-2 uppercase tracking-widest" onClick={handleSubmit}>
+        <Icon icon="mdi:download" width="2.2em" height="2.2em" />
+        Download
+      </Button>
       {progress() > 0 && (
         <div class="mt-4">
           <p>Progress: {progress().toFixed(2)}%</p>

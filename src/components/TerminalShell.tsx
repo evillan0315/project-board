@@ -114,19 +114,15 @@ export default function TerminalShell(props: TerminalShellProps) {
 
     const token = localStorage.getItem('token');
 
-    const socketInstance = io('http://localhost:5000/terminal', {
+    const socketInstance = io('https://board-api.duckdns.org/terminal', {
       auth: { token: `Bearer ${token}` },
-      withCredentials: false,
+      //withCredentials: true,
     });
 
     setSocket(socketInstance);
 
     socketInstance.on('connect', () => {
       console.log('[✔] Terminal connected');
-      termInstance.writeln('Welcome to Terminal');
-      termInstance.writeln('');
-      handleCommand('osinfo');
-      prompt();
     });
 
     socketInstance.on('output', (msg: string) => {

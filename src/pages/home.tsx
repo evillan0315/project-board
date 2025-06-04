@@ -58,7 +58,8 @@ export default function Home() {
       <main class="flex-1 px-6 py-12 md:px-12 lg:px-24">
         {/* Hero Section */}
         <Hero
-          user={isAuthenticated() ? user : null}
+          
+          user={isAuthenticated() ? { name: user()?.name } : null}
           heading={
             <>
               Welcome to <span class="text-blue-600 dark:text-sky-400 italic text-7xl">Project</span>{' '}

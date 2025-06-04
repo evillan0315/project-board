@@ -1,6 +1,6 @@
 import axios from 'axios';
-//const API_URL = `https://board-api.duckdns.org/api`;
-const API_URL = `http://localhost:5000/api`;
+const API_URL = `https://board-api.duckdns.org/api`;
+//const API_URL = `http://localhost:5000/api`;
 const token = localStorage.getItem('token');
 
 // Create axios instance
@@ -17,8 +17,6 @@ const api = axios.create({
 // Add request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {
-    console.log(token, 'token');
-    console.log(config, 'config');
     return config;
   },
   (error) => Promise.reject(error),

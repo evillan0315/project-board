@@ -15,7 +15,7 @@ export default function Downloader() {
             </div>
 
             <AudioDownloader />
-            
+
             <FileGallery />
           </div>
 
@@ -23,8 +23,8 @@ export default function Downloader() {
           <div class="w-full md:w-1/3 space-y-4 p-4 border rounded-lg">
             <h3 class="text-xl font-semibold">🎧 About Audio Downloader</h3>
             <p class="text-gray-600">
-              This tool allows you to extract audio from YouTube videos using a custom backend powered by <code>yt-dlp</code>.
-              Simply paste the video URL and track download progress in real-time.
+              This tool allows you to extract audio from YouTube videos using a custom backend powered by{' '}
+              <code>yt-dlp</code>. Simply paste the video URL and track download progress in real-time.
             </p>
 
             <h4 class="font-medium text-gray-800 mt-4">✨ Features</h4>
@@ -43,7 +43,8 @@ export default function Downloader() {
 
             <h4 class="font-medium text-gray-800 mt-4">🧰 Tech Stack</h4>
             <p class="text-gray-600">
-              Built with <strong>SolidJS</strong>, <strong>NestJS</strong>, <code>yt-dlp</code>, and <strong>WebSockets</strong> for fast, reactive updates.
+              Built with <strong>SolidJS</strong>, <strong>NestJS</strong>, <code>yt-dlp</code>, and{' '}
+              <strong>WebSockets</strong> for fast, reactive updates.
             </p>
           </div>
         </div>
@@ -51,4 +52,3 @@ export default function Downloader() {
     </div>
   );
 }
-

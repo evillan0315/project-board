@@ -8,7 +8,7 @@ type HeroButton = {
   showWhen?: 'authenticated' | 'unauthenticated' | 'always';
 };
 type HeroProps = {
-  user: { name?: string } | null; // <-- not a function anymore
+  user?: { name?: string } | null;
   heading: JSX.Element;
   subheading: string;
   buttons?: HeroButton[];
@@ -42,7 +42,7 @@ const Hero = (props: HeroProps): JSX.Element => {
       {isAuthenticated() && (
         <div class="mb-8">
           <p class="text-sky-600 dark:text-sky-400 text-lg font-medium">
-            Welcome back, {props.user()?.name || 'User'}!
+             <span>Welcome, {props.user?.name ?? 'Guest'}!</span>
           </p>
           <p class="text-sm text-gray-600 dark:text-gray-400">Your projects are just a click away.</p>
         </div>

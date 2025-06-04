@@ -21,7 +21,7 @@ import api from '../services/api';
 export default function Editor() {
   const { user, isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = createSignal(false);
-  const [filePath, setFilePath] = createSignal('./README.md');
+  const [filePath, setFilePath] = createSignal('README.md');
   const [fileContent, setFileContent] = createSignal<string>('');
 
   const [fileManagerWidth, setFileManagerWidth] = createSignal(400);
@@ -133,11 +133,11 @@ export default function Editor() {
 
       {/* Code Editor Panel */}
       <div class="flex min-h-0 min-w-0 flex-col overflow-auto pt-9" style={`flex: ${1 - left()}`}>
-        <EditorComponent theme="dark" filePath={filePath()} content={fileContent()} language="typescript" />
+        <EditorComponent theme="dark" filePath={filePath()} content={fileContent()} />
       </div>
 
       {/* Integrated Terminal Drawer */}
-      <TerminalDrawer position="bottom" size="200px" fontSize="12" resizable={true} draggable={false} />
+      <TerminalDrawer position="bottom" size="200px" fontSize={12} resizable={true} draggable={false} />
     </div>
   );
 }

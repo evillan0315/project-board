@@ -17,12 +17,14 @@ type ContextMenuState = {
 };
 
 const fetchFileList = async (): Promise<FileItem[]> => {
-  const res = await api.get('/file/list?directory=./&recursive=true');
+  const dir = '/var/www/webapps/project-board';
+  const res = await api.get(`/file/list?directory=./`);
   if (!res.data) throw new Error('Failed to load files');
+  console.log(res.data, 'res.data');
   return res.data;
 };
 
-function buildTree(files: FileItem[]): FileItem[] {
+function buildTree(files: FileItem[] = []): FileItem[] {
   const map = new Map<string, FileItem & { children: FileItem[] }>();
   for (const file of files) {
     map.set(file.path, { ...file, children: file.children || [] });
@@ -60,7 +62,7 @@ const FileNode = (props: {
 
   const handleRename = async () => {
     if (newName() !== props.file.name) {
-      await renameFile(props.file.path, newName());
+      //await renameFile(props.file.path, newName());
     }
     setEditing(false);
   };
@@ -111,8 +113,9 @@ const FileNode = (props: {
 };
 
 export default function FileManager(props: { onFileSelect: (path: string) => void }) {
-  const [files, { refetch }] = createResource(fetchFileList);
 
+  const [files, { refetch }] = createResource(fetchFileList);
+  
   const [contextMenu, setContextMenu] = createSignal<ContextMenuState>({
     x: 0,
     y: 0,

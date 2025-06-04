@@ -28,7 +28,7 @@ export const FileGallery = () => {
     const result = res.data.map((file: any) => ({
       name: file.name,
       type: getFileType(file.name),
-      url: `http://localhost:5000/api/media/${encodeURIComponent(file.name)}`
+      url: `https://board-api.duckdns.org/api/media/${encodeURIComponent(file.name)}`,
     }));
 
     // Select a random playable media file
@@ -126,4 +126,3 @@ export const FileGallery = () => {
     </div>
   );
 };
-

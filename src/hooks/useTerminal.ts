@@ -1,4 +1,4 @@
-import { Terminal } from 'xterm';
+import { Terminal } from '@xterm/xterm';
 import { createSignal } from 'solid-js';
 
 export function useTerminal(options: { term: Terminal; prompt?: string; socket?: WebSocket }) {

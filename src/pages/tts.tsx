@@ -75,8 +75,8 @@ export default function TTSForm() {
     { speaker: 'Marionette', voiceName: 'Puck' },
   ]);
 
-  const [audioSrc, setAudioSrc] = createSignal<string | null>(null);
-  const [audioBlob, setAudioBlob] = createSignal<Blob | null>(null);
+  const [audioSrc, setAudioSrc] = createSignal<string | undefined>();
+  const [audioBlob, setAudioBlob] = createSignal<Blob | null>();
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal('');
 
@@ -96,8 +96,8 @@ export default function TTSForm() {
   const handleSubmit = async () => {
     setLoading(true);
     setError('');
-    setAudioSrc(null);
-    setAudioBlob(null);
+    setAudioSrc(undefined);
+    //setAudioBlob();
 
     try {
       const response = await api.post(
