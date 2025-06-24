@@ -77,10 +77,7 @@ A developer-focused layout system interface, implemented using **TypeScript**, *
 
 ## 📸 Screenshots
 
-| Login Page                          | Homepage                                  | Dashboard                            |
-| ----------------------------------- | ----------------------------------------- | ------------------------------------ |
-| ![Login](./project-board-login.png) | ![Homepage](./homepage-project-board.png) | ![Dashboard](./dashboard-screen.png) |
-
+<img src="./dark-settings-editor.png" />
 
 ---
 
