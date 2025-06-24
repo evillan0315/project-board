@@ -81,6 +81,10 @@ A developer-focused layout system interface, implemented using **TypeScript**, *
 
 ---
 
+<img src="./white-bg-editor.png" />
+
+---
+
 ## 📁 Project Structure
 
 ```
