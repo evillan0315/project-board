@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+/* markdown.css */
+.group:hover button {
+  opacity: 1;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+}
+.prose p {
+}
+.markdown-wrapper h1 {
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+.markdown-wrapper h2 {
+  margin-bottom: 16px;
+  margin-top: 16px;
+  font-size: 1.6em;
+}
+.markdown-wrapper h3 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-size: 1.4em;
+}
+.markdown-wrapper h4 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-size: 1.3em;
+}
+.markdown-wrapper h5 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-size: 1.2em;
+}
+.markdown-wrapper h2 > code {
+ font-size: 1em;
+}
+.markdown-wrapper h3 > code {
+ font-size: .9em;
+}
+.markdown-wrapper p {
+ margin-bottom: 0.5rem;   /* Space between items */
+}
+.markdown-wrapper ul {
+  list-style-type: disc;   /* Bullet style */
+  padding-left: 1.5rem;    /* Indent */
+  margin-bottom: 1rem;     /* Optional spacing */
+}
+.markdown-wrapper ul li {
+  margin-bottom: 0.5rem;   /* Space between items */
+}
+.markdown-wrapper ol{
+  list-style-type: decimal; /* Numbered list */
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-wrapper ol li {
+  margin-bottom: 0.5rem;
+}
+
+.markdown-wrapper pre {
+  @apply rounded-lg;
+  padding: 16px;
+  overflow: auto;
+}

@@ -1,0 +1,63 @@
+name: Deploy Project Board to AWS EC2
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install pm2
+        run: npm install -g pm2
+
+      - name: Deploy to EC2 via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          source: "."
+          target: "/var/www/webapps/project-board"
+          strip_components: 1
+
+      - name: Restart Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+            nvm use 22 || echo "⚠️ Node 22 not installed via NVM"
+
+            cd /var/www/webapps/project-board
+
+            echo "✅ Node version: $(node -v)"
+            echo "✅ Installing pnpm and pm2..."
+            npm install -g pnpm pm2
+
+            echo "📦 Installing dependencies..."
+            pnpm install
+
+            echo "⚙️ Building project..."
+            pnpm build
+
+            echo "🚀 Starting or restarting PM2 process..."
+            pm2 restart api-server || pm2 start ecosystem.config.cjs
+            pm2 save
+

@@ -1,0 +1,248 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    /* Light mode variables */
+    --color-bg: theme(colors.gray.100);
+    --color-text: theme(colors.gray.900);
+    --color-border: theme(colors.gray.300);
+    --color-hover: theme(colors.gray.200);
+    --color-resizer: theme(colors.gray.300);
+    --color-resizer-hover: theme(colors.sky.600);
+    --color-pre-bg: theme(colors.sky.100);
+    --color-modal-bg: theme(colors.gray.500 / 0.7);
+    --color-shadow: rgba(0, 0, 0, 0.1);
+  }
+  :root {
+    --btn-bg: theme(colors.gray.100);
+    --btn-text: theme(colors.gray.900);
+    --btn-border: theme(colors.gray.300);
+    --btn-hover-bg: theme(colors.sky.100);
+    --btn-hover-text: theme(colors.sky.700);
+    --btn-icon: theme(colors.gray.600);
+    --btn-icon-hover: theme(colors.sky.600);
+  }
+
+  html.dark {
+    --btn-bg: theme(colors.gray.800);
+    --btn-text: theme(colors.gray.100);
+    --btn-border: theme(colors.gray.700);
+    --btn-hover-bg: theme(colors.gray.700);
+    --btn-hover-text: theme(colors.sky.400);
+    --btn-icon: theme(colors.gray.300);
+    --btn-icon-hover: theme(colors.sky.500);
+  }
+  html.dark {
+    /* Dark mode variables */
+    --color-bg: theme(colors.gray.950);
+    --color-text: theme(colors.gray.100);
+    --color-border: theme(colors.gray.800);
+    --color-hover: theme(colors.gray.800);
+    --color-resizer: theme(colors.gray.800);
+    --color-pre-bg: theme(colors.gray.900);
+    --color-modal-bg: theme(colors.gray.700 / 0.7);
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    @apply transition-colors duration-300;
+  }
+
+  button {
+    @apply p-[2px] min-w-[24px] text-sm;
+  }
+
+  button:hover {
+    @media (hover: hover) {
+      color: var(--color-sky-600);
+    }
+  }
+
+  html.dark button:hover {
+    @media (hover: hover) {
+      color: var(--color-sky-500);
+    }
+  }
+}
+
+@layer components {
+  .border,
+  .border-t,
+  .border-b,
+  .border-l,
+  .border-r {
+    border-color: var(--color-border);
+    @apply border;
+  }
+
+  .resizer {
+    background-color: var(--color-resizer);
+  }
+
+  .resizer:hover {
+    background-color: var(--color-resizer-hover);
+  }
+
+  #context-menu {
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+    @apply border;
+  }
+
+  #context-menu li {
+    @apply cursor-pointer;
+  }
+
+  #context-menu li:hover {
+    background-color: var(--color-hover);
+  }
+
+  .collapsible-panel {
+    background-color: var(--color-bg);
+  }
+
+  .collapsible-panel .collapsible-panel-header {
+    background-color: theme(colors.gray.100);
+  }
+
+  html.dark .collapsible-panel .collapsible-panel-header {
+    background-color: theme(colors.gray.900);
+  }
+
+  .dropdown-menu {
+    background-color: var(--color-bg);
+  }
+
+  .dropdown-menu li:hover {
+    background-color: var(--color-hover);
+  }
+
+  .markdown-wrapper pre {
+    background-color: var(--color-pre-bg);
+    border-color: var(--color-border);
+    @apply border;
+  }
+
+  .markdown-wrapper hr {
+    border-color: var(--color-border);
+    @apply mt-6 border;
+  }
+
+  .terminal.xterm {
+    @apply p-3;
+  }
+
+  .editor-footer {
+    border-color: var(--color-border);
+    @apply border-t;
+  }
+
+  .typewriter-code-wrapper {
+    border-color: var(--color-border);
+    background-color: var(--color-bg);
+    @apply shadow-lg rounded-lg;
+  }
+
+  .typewriter-code-wrapper > .screen {
+    border-color: var(--color-border);
+    background-color: theme(colors.gray.100);
+    @apply shadow-xl shadow-gray-200 rounded-xl;
+  }
+
+  .dialog-modal {
+    background-color: var(--color-modal-bg);
+  }
+
+  .dialog-modal .dialog-modal-body {
+    border-color: var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    @apply shadow-xs;
+  }
+
+  .dialog-modal .dialog-modal-body button {
+    border-color: var(--color-border);
+    @apply shadow-xs mx-2 px-4 py-2;
+  }
+
+  .dialog-modal .dialog-modal-body input {
+    border-color: theme(colors.gray.600);
+    @apply text-sm px-4 py-1;
+  }
+
+  .dialog-modal .dialog-modal-body input:focus,
+  .dialog-modal .dialog-modal-body textarea:focus,
+  .dialog-modal .dialog-modal-body select:focus {
+    @apply border-sky-800 ring-1 ring-offset-2 ring-sky-700 shadow-md rounded;
+  }
+
+  html.dark .dialog-modal .dialog-modal-body input:focus,
+  html.dark .dialog-modal .dialog-modal-body textarea:focus,
+  html.dark .dialog-modal .dialog-modal-body select:focus {
+    @apply bg-sky-600;
+  }
+    .btn {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-border);
+    @apply inline-flex items-center justify-center rounded px-3 py-1.5 text-sm transition-colors duration-200;
+  }
+
+  .btn:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+  }
+
+  .btn-icon {
+    background-color: transparent;
+    color: var(--btn-icon);
+    @apply inline-flex items-center justify-center rounded p-1 transition-colors duration-200;
+  }
+
+  .btn-icon:hover {
+    color: var(--btn-icon-hover);
+    background-color: var(--btn-hover-bg);
+  }
+}
+
+@layer utilities {
+  @keyframes shadowPulse {
+    0% {
+      box-shadow: 0 4px 6px var(--color-shadow);
+    }
+    50% {
+      box-shadow: 15px 15px 30px rgba(0, 128, 255, 0.5);
+    }
+    100% {
+      box-shadow: 0 4px 6px var(--color-shadow);
+    }
+  }
+
+  @keyframes shadowGradient {
+    0% {
+      box-shadow:
+        0 4px 6px var(--color-shadow),
+        0 0 10px rgba(255, 0, 0, 0.4);
+    }
+    33% {
+      box-shadow:
+        0 8px 12px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(0, 128, 255, 0.5);
+    }
+    66% {
+      box-shadow:
+        0 12px 16px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(128, 0, 255, 0.6);
+    }
+    100% {
+      box-shadow:
+        0 4px 6px var(--color-shadow),
+        0 0 10px rgba(255, 0, 0, 0.4);
+    }
+  }
+}
+
+
