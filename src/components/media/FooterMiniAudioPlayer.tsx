@@ -26,7 +26,8 @@ const FooterMiniAudioPlayer = () => {
   const [percentPlayed, setPercentPlayed] = createSignal(0);
   const [percentBuffered, setPercentBuffered] = createSignal(0);
   const [duration, setDuration] = createSignal(0);
-
+  const [playlistFilter, setPlaylistFilter] = createSignal('');
+  const filteredSongs = () => songs().filter((s) => s.name.toLowerCase().includes(playlistFilter().toLowerCase()));
   let ref: HTMLDivElement;
   const $shuffledQueue = useStore(shuffledQueue);
   const $queueIndex = useStore(queueIndex);
@@ -271,8 +272,17 @@ const FooterMiniAudioPlayer = () => {
               </div>
               <span class="text-xs text-gray-500">{formattedDuration()}</span>
             </div>
-
-            {/* Volume */}
+            {/* Playlist Search */}
+            <div class="flex">
+              <input
+                type="text"
+                placeholder="Search songs..."
+                value={playlistFilter()}
+                onInput={(e) => setPlaylistFilter(e.currentTarget.value)}
+                class="w-full p-1 border rounded text-sm focus:outline-none focus:ring focus:ring-sky-500"
+              />
+            </div>
+            {/* Volume 
             <div class="flex items-center gap-2">
               <Icon icon="mdi:volume-high" width="1.2em" height="1.2em" class="text-gray-500" />
               <input
@@ -284,26 +294,31 @@ const FooterMiniAudioPlayer = () => {
                 onInput={(e) => setVolume(parseFloat(e.currentTarget.value))}
                 class="w-full"
               />
-            </div>
+            </div>*/}
           </div>
 
           {/* Playlist */}
 
-          <ul class="mt-1 audio-playlist w-full">
-            {songs().map((song, idx) => (
-              <li
-                title={song.name}
-                class={`text-sm whitespace-nowrap truncate w-full cursor-pointer ${idx === currentIndex() ? 'active font-semibold text-sky-600' : ''}`}
-                onClick={async () => {
-                  setCurrentIndex(idx);
-                  await loadSong(idx);
-                  play();
-                  setShowPlaylist(false);
-                }}
-              >
-                {song.name}
-              </li>
-            ))}
+          <ul class="mt-1 audio-playlist w-full min-h-[100px]">
+            <For each={filteredSongs()}>
+              {(song, i) => (
+                <li
+                  title={song.name}
+                  class={`text-sm whitespace-nowrap truncate w-full cursor-pointer ${
+                    songs().indexOf(song) === currentIndex() ? 'active font-semibold text-sky-600' : ''
+                  }`}
+                  onClick={async () => {
+                    const songIdx = songs().indexOf(song);
+                    setCurrentIndex(songIdx);
+                    await loadSong(songIdx);
+                    play();
+                    setShowPlaylist(false);
+                  }}
+                >
+                  {song.name}
+                </li>
+              )}
+            </For>
           </ul>
         </div>
       </Show>

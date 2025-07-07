@@ -61,7 +61,6 @@ export default function EditorFileTabItem(props: EditorFileTabItemProps): JSX.El
         >
           {fileName()}
         </span>
-        {hasUnsaved() && <span class="ml-1 text-info-600 flex-shrink-0">*</span>}
       </div>
       <Icon
         title={`Close ${fileName()}`}

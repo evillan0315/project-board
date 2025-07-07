@@ -112,7 +112,7 @@ export function EditorFileManagerNode(props: EditorFileManagerNodeProps) {
       >
         <div class="flex items-center justify-start gap-3">
           <Icon width="1.2em" height="1.2em" icon={currentIcon()} />
-          <Show when={state.editing} fallback={<div class="truncate max-w-[150px]">{props.file.name}</div>}>
+          <Show when={state.editing} fallback={<div class="truncate w-full max-w-80">{props.file.name}</div>}>
             <input
               class="rounded px-1 text-sm"
               value={state.newName}
@@ -191,7 +191,7 @@ export function EditorFileManagerHeader(props: EditorFileManagerHeaderProps) {
       await fileService.emitDynamicFileEvent({
         endpoint: '/file/create',
         method: 'POST',
-        body: { filePath: `${$currentDirectory()}/${name}`, type },
+        body: { filePath: `${$currentDirectory()}/${name}`, type, isDirectory: type === 'folder' ? true : false },
         event: type === 'file' ? 'createFile' : 'createFolder',
       });
       props.fetchDirectory($currentDirectory());
@@ -389,8 +389,8 @@ export default function EditorFileManager(props: EditorFileManagerProps) {
   });
 
   return (
-    <div class="file-manager-wrapper flex flex-col h-full">
-      <div class="p-2 flex-grow overflow-auto">
+    <div class="file-manager-wrapper w-full min-h-0 ">
+      <div class="p-2 max-h-[calc(100vh-120px)] overflow-auto">
         <Show when={fileTree().length > 0} fallback={<div class="text-center text-gray-500">No files or folders.</div>}>
           <For each={fileTree()}>
             {(file) => (

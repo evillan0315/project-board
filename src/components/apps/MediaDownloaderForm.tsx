@@ -185,17 +185,6 @@ export default function MediaDownloaderForm() {
         <option value="bilibili">Bilibili</option>
         {/* Add more providers as needed */}
       </select>
-
-      <Button
-        class="w-full flex items-center gap-2 px-2 py-2 uppercase tracking-widest"
-        variant="secondary"
-        onClick={handleSubmit}
-        disabled={loading()}
-      >
-        <Icon icon="mdi:download" width="2.2em" height="2.2em" />
-        {loading() ? 'Downloading...' : 'Download'}
-      </Button>
-
       {progress() > 0 && (
         <div class="mt-4">
           <p>Progress: {progress().toFixed(2)}%</p>
@@ -235,6 +224,15 @@ export default function MediaDownloaderForm() {
           )}
         </>
       )}
+      <Button
+        class="w-full flex items-center gap-2 px-2 py-2 uppercase tracking-widest"
+        variant="secondary"
+        onClick={handleSubmit}
+        disabled={loading()}
+      >
+        <Icon icon="mdi:download" width="2.2em" height="2.2em" />
+        {loading() ? 'Downloading...' : 'Download'}
+      </Button>
 
       {error() && <div class="mt-4 text-red-600">❌ Error: {error()}</div>}
     </div>

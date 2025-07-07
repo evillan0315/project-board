@@ -67,7 +67,7 @@ export default function App() {
                  * @param {JSX.Element} props.children - The content to be rendered within the Suspense boundary.
                  * @returns {JSX.Element} The Suspense component with a fallback loading indicator.
                  */
-                <Suspense fallback={<Loading backdrop={true} />}>{props.children}</Suspense>
+                <Suspense>{props.children}</Suspense>
               }
             />
           )}
@@ -115,7 +115,14 @@ export default function App() {
               </ProtectedRoute>
             )}
           />
-
+          <Route
+            path="/builder"
+            component={() => (
+              <ProtectedRoute>
+                <Builder />
+              </ProtectedRoute>
+            )}
+          />
           {/**
            * Defines a catch-all route for any undefined paths, displaying a 404 Not Found message.
            * @path "*"

@@ -295,7 +295,6 @@ export function useGeminiTerminal(props: UseTerminalProps): UseTerminalReturn {
         systemInstructionToSend = undefined;
       }
 
-      console.log(editorFilePathValue, editorContentValue);
       try {
         const fileData = {
           data: btoa(unescape(encodeURIComponent(editorContentValue))), // Correctly handle UTF-8 to base64

@@ -7,6 +7,8 @@ import ToggleSwitch from '../ui/ToggleSwitch';
 import { SETTINGS_TABS, type SettingsTab } from '../../constants/settingsTabs';
 import { confirm, alert } from '../../services/modalService';
 import { validateSettings } from '../../utils/settingsValidator';
+import { Button } from '../ui/Button';
+import UserConfigForm from '../schema/UserConfigForm';
 
 export interface SettingsState {
   theme: 'Dark' | 'Light';
@@ -52,21 +54,19 @@ export default function ModalSettings(props: ModalSettingsProps): JSX.Element {
   };
 
   return (
-    <ModalLayout title="Settings" onClose={props.onClose}>
+    <ModalLayout size="xl" slideFrom="bottom" title="Settings" onClose={props.onClose}>
       <form onSubmit={handleSave}>
         {/* Tabs */}
-        <div class="flex border-b border-gray-700 mb-2 rounded">
+        <div class="modal-tabs flex border-b mb-2 rounded">
           <For each={SETTINGS_TABS}>
             {(tab) => (
-              <button
+              <Button
                 type="button"
-                class={`px-2 py-1 rounded-t ${
-                  currentTab() === tab ? 'bg-gray-700 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                }`}
+                class={`border-b-none px-2 py-1 rounded-t ${currentTab() === tab ? 'text-sky-500 active' : ''}`}
                 onClick={() => setCurrentTab(tab)}
               >
                 {tab}
-              </button>
+              </Button>
             )}
           </For>
         </div>
@@ -111,12 +111,21 @@ export default function ModalSettings(props: ModalSettingsProps): JSX.Element {
           </div>
         </Show>
 
+        {/* User Configuration Tab */}
+        <Show when={currentTab() === 'User Configuration'}>
+          <div class="max-h-[60vh] overflow-auto">
+            <UserConfigForm />
+          </div>
+        </Show>
+
         {/* Save button */}
-        <div class="flex justify-end mt-4">
-          <button type="submit" class="bg-sky-500 text-white px-3 py-1 rounded hover:bg-sky-600">
-            Save
-          </button>
-        </div>
+        <Show when={currentTab() !== 'User Configuration'}>
+          <div class="flex justify-end mt-4">
+            <button type="submit" class="bg-sky-500 text-white px-3 py-1 rounded hover:bg-sky-600">
+              Save
+            </button>
+          </div>
+        </Show>
       </form>
     </ModalLayout>
   );

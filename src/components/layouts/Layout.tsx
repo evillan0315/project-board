@@ -5,6 +5,7 @@ import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
 import CommandPalette from './CommandPalette';
 import ModalSettings from './ModalSettings';
+import { fileService } from '../../services/fileService';
 
 import { useStore } from '@nanostores/solid';
 import MiniAudioPlayer from '../media/MiniAudioPlayer';
@@ -50,7 +51,7 @@ export default function Layout({
   const $showSettings = useStore(showSettingsStore);
   const $settings = useStore(settingsStore);
   const $settingsTab = useStore(settingsTabStore);
-
+  fileService.connect();
   return (
     <div class="flex flex-col h-full relative">
       <Show when={header}>{header}</Show>

@@ -1,20 +1,74 @@
 import api from '../../services/api';
-import { editorContent, editorOriginalContent } from '../../stores/editorContent';
+import { editorContent, editorActiveContent, editorOriginalContent, editorLanguage } from '../../stores/editorContent';
 import { showToast } from '../../stores/toast';
 import { useEditorFile } from '../../hooks/useEditorFile';
-import { useCodeTools } from '../../hooks/useCodeTools';
+import { editorTools } from '../../services/file';
+import { type APIProps } from '../../types/api';
 
-export async function handleRemoveComments() {
+export async function handleRemoveComments(content: string) {
   try {
-    const response = await api.post('/utils/remove-code-comment', { content: editorContent.get() });
-    editorContent.set(response.data);
-    editorOriginalContent.set(response.data);
+    const payload: APIProps = {
+      endpoint: '/utils/remove-code-comment',
+      method: 'POST',
+      event: 'removeCodeComment',
+      body: { content: editorOriginalContent.get() },
+    };
+    const response = await editorTools(payload);
+    if (!response && response.data) showToast(`Error Event:  ${payload.event}`, 'error');
     showToast('Comments removed successfully.', 'success');
   } catch (err: any) {
     showToast(`Error: ${err.message}`, 'error');
   }
 }
 
+export async function formatCode() {
+  try {
+    const payload: APIProps = {
+      endpoint: '/utils/format',
+      method: 'POST',
+      event: 'formatCode',
+      body: {
+        code: editorActiveContent.get(),
+        language: editorLanguage.get(),
+      },
+    };
+    const response = await editorTools(payload);
+    if (!response && response.data) showToast(`Error Event:  ${payload.event}`, 'error');
+    showToast(`${payload.event} successfully.`, 'success');
+  } catch (err: any) {
+    showToast(`Error: ${err.message}`, 'error');
+  }
+}
+
+export async function optimize() {
+  try {
+    const payload: APIProps = {
+      endpoint: '/google-gemini/optimize-code',
+      method: 'POST',
+      event: 'optimizeCode',
+      body: {
+        codeSnippet: editorActiveContent.get(),
+        language: editorLanguage.get(),
+        output: editorLanguage.get(),
+      },
+    };
+    const response = await editorTools(payload);
+    if (!response && response.data) showToast(`Error Event:  ${payload.event}`, 'error');
+    showToast(`${payload.event} successfully.`, 'success');
+  } catch (err: any) {
+    showToast(`Error: ${err.message}`, 'error');
+  }
+}
+
+export async function analyze() {
+  const tools = await useCodeTools();
+  tools.analyze();
+}
+
+export async function repair() {
+  const tools = await useCodeTools();
+  tools.repair();
+}
 export async function handleGenerateDocumentation() {
   // Placeholder for documentation generation logic
   showToast('Documentation generation not implemented.', 'info');
@@ -27,30 +81,10 @@ export async function handleGenerateCode() {
   // Placeholder for documentation generation logic
   showToast('Code generation not implemented.', 'info');
 }
-export function saveFile() {
-  const editor = useEditorFile();
+export async function saveFile() {
+  const editor = await useEditorFile();
   editor.saveFile();
 }
-export function formatCode() {
-  const editor = useEditorFile();
-  editor.formatCode();
-}
-
-export function optimize() {
-  const tools = useCodeTools();
-  tools.optimize();
-}
-
-export function analyze() {
-  const tools = useCodeTools();
-  tools.analyze();
-}
-
-export function repair() {
-  const tools = useCodeTools();
-  tools.repair();
-}
-
 export const sharedDrawerProps = {
   prompt: () => '',
   setPrompt: () => {},

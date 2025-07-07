@@ -2,7 +2,9 @@ import { createSignal, Show, For, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { useAuth } from '../contexts/AuthContext';
 import { SolidApexCharts } from 'solid-apexcharts';
-import { Icon } from '@iconify-icon/solid';
+import { Icon } from '../components/ui/Icon';
+import { Button } from '../components/ui/Button';
+
 import MetricCard from '../components/MetricCard';
 import { theme } from '../stores/theme';
 import Typewriter from '../components/Typewriter';
@@ -10,7 +12,9 @@ import { PageHeader } from '../components/ui/PageHeader';
 import { getThemeExtension } from '../utils/editorTheme';
 import DashboardPanel from '../components/DashboardPanel';
 import ReadFileForm from '../components/ReadFileForm';
-
+import SchemaManager from '../components/SchemaManager';
+import IconManager from '../components/IconManager';
+import Transcoder from '../components/Transcoder';
 export default function Dashboard() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -199,8 +203,8 @@ export default EditorComponent;
   return (
     <div class="flex-1 h-full overflow-auto">
       <Show when={isAuthenticated()}>
-        <div class="flex flex-col max-w-7xl mx-auto">
-          <div class="flex-1 scroll-smooth px-4 py-4 space-y-4 mt-2">
+        <div class="flex flex-col  max-w-7xl mx-auto">
+          <div class="flex-1 scroll-smooth py-4 space-y-4 mt-2">
             <PageHeader icon="mdi:view-dashboard">
               <h1 class="leading-0 uppercase tracking-widest text-2xl">
                 <b>Dash</b>board
@@ -210,10 +214,15 @@ export default EditorComponent;
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4  mt-4">
               <For each={metrics()}>{(metric) => <MetricCard {...metric} />}</For>
             </div>
+            <Transcoder />
+            <div class="flex  items-start justify-between gap-2">
+              <IconManager />
+              <ReadFileForm />
+            </div>
+            <SchemaManager />
             <DashboardPanel />
-            <ReadFileForm />
             {/* Recent Entries */}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 mt-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               <For each={entries()}>
                 {(entry) => (
                   <div class="rounded-xl border dark:border-gray-900 p-4 mt-2 shadow-sm">
@@ -225,66 +234,67 @@ export default EditorComponent;
                   </div>
                 )}
               </For>
-            </div>
-            <div class="typewriter-code-wrapper h-auto max-w-4xl mx-auto flex items-center my-10 border rounded-xl relative">
-              <div class="absolute top-4 left-8">
-                <span class="flex items-center justify-center gap-3">
-                  <Icon
-                    icon="mdi:circle"
-                    width="1em"
-                    height="1em"
-                    class="text-gray-950 shadow-sky-500 rounded-full shadow-lg"
-                  />
-                  <Icon
-                    icon="mdi:circle"
-                    width="1em"
-                    height="1em"
-                    class="text-sky-700 bg-sky-700 border border-gray-800 shadow-sky-500 rounded-full shadow-lg"
-                  />
-                  <Icon
-                    icon="mdi:circle"
-                    width="1em"
-                    height="1em"
-                    class="text-red-500 bg-red-500 border border-gray-600 shadow-sky-500 rounded-full shadow-lg"
-                  />
-                </span>
+
+              <div class="typewriter-code-wrapper h-auto max-w-4xl mx-auto flex items-center my-10 border rounded-xl relative">
+                <div class="absolute top-4 left-8">
+                  <span class="flex items-center justify-center gap-3">
+                    <Icon
+                      icon="mdi:circle"
+                      width="1em"
+                      height="1em"
+                      class="text-gray-950 shadow-sky-500 rounded-full shadow-lg"
+                    />
+                    <Icon
+                      icon="mdi:circle"
+                      width="1em"
+                      height="1em"
+                      class="text-sky-700 bg-sky-700 border border-gray-800 shadow-sky-500 rounded-full shadow-lg"
+                    />
+                    <Icon
+                      icon="mdi:circle"
+                      width="1em"
+                      height="1em"
+                      class="text-red-500 bg-red-500 border border-gray-600 shadow-sky-500 rounded-full shadow-lg"
+                    />
+                  </span>
+                </div>
               </div>
-            </div>
-            {/* Applications Section */}
-            <div class="grid grid-cols-1 px-4 mt-4">
-              <h2 class="leading-0 uppercase tracking-widest text-xl mt-6 mb-10">
-                <b>App</b>lications
-              </h2>
-              <div class="flex space-x-6">
-                {/* Editor */}
-                <button
-                  class="flex flex-col items-center justify-center p-4 rounded-2xl border dark:border-gray-900 shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
-                  onClick={() => (window.location.href = '/editor')}
-                  aria-label="Open Editor"
-                >
-                  <Icon icon="mdi:xml" width="50" height="50" class="text-sky-500 shrink-0" />
-                  Editor
-                </button>
+              {/* Applications Section */}
+              <div class="grid grid-cols-1 px-4 mt-4">
+                <h2 class="leading-0 uppercase tracking-widest text-xl mt-6 mb-10">
+                  <b>App</b>lications
+                </h2>
+                <div class="flex space-x-6">
+                  {/* Editor */}
+                  <Button
+                    icon="mdi:xml"
+                    class="flex flex-col items-center justify-center p-4 rounded-2xl border dark:border-gray-900 shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
+                    onClick={() => (window.location.href = '/editor')}
+                    aria-label="Open Editor"
+                  >
+                    Editor
+                  </Button>
 
-                {/* TTS */}
-                <button
-                  class="flex flex-col items-center justify-center p-4 rounded-2xl border dark:border-gray-900 shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
-                  onClick={() => (window.location.href = '/tts')}
-                  aria-label="Open Text To Speech"
-                >
-                  <Icon icon="mdi:microphone-message" width="50" height="50" class="text-sky-500 shrink-0" />
-                  TTS
-                </button>
+                  {/* TTS */}
+                  <Button
+                    icon="mdi:microphone-message"
+                    class="flex flex-col items-center justify-center p-4 rounded-2xl border dark:border-gray-900 shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
+                    onClick={() => (window.location.href = '/tts')}
+                    aria-label="Open Text To Speech"
+                  >
+                    TTS
+                  </Button>
 
-                {/* Terminal */}
-                <button
-                  class="flex flex-col items-center justify-center border dark:border-gray-900 p-4 rounded-2xl shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
-                  onClick={() => (window.location.href = '/terminal')}
-                  aria-label="Open Terminal"
-                >
-                  <Icon icon="mdi:console" width="50" height="50" class="text-sky-500 shrink-0" />
-                  Terminal
-                </button>
+                  {/* Terminal */}
+                  <button
+                    class="flex flex-col items-center justify-center border dark:border-gray-900 p-4 rounded-2xl shadow-md w-32 hover:bg-gray-700 hover:text-white transition"
+                    onClick={() => (window.location.href = '/terminal')}
+                    aria-label="Open Terminal"
+                  >
+                    <Icon icon="mdi:console" width="50" height="50" class="text-sky-500 shrink-0" />
+                    Terminal
+                  </button>
+                </div>
               </div>
             </div>
           </div>

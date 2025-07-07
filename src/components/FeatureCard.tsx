@@ -1,5 +1,5 @@
 import type { JSX } from 'solid-js';
-import { Icon } from '@iconify-icon/solid';
+import { Icon } from './ui/Icon';
 import type { FeatureCardProps } from '../types/types';
 
 /**
@@ -40,8 +40,8 @@ import type { FeatureCardProps } from '../types/types';
 const FeatureCard = (props: FeatureCardProps): JSX.Element => {
   return (
     <div class="p-6 border rounded-lg bg-gray-800/10 border-gray-500/30 hover:shadow-lg transition cursor-default ">
-      <Icon icon={props.icon} width="50" height="50" class="text-sky-500 shrink-0" />
-      <h3 class="text-xl font-semibold mb-2">{props.title}</h3>
+      <Icon icon={props.icon} width="50px" height="50px" class="text-sky-500 shrink-0" />
+      <h3 class="text-xl font-semibold mb-2 mt-2">{props.title}</h3>
       <p class="">{props.description}</p>
     </div>
   );

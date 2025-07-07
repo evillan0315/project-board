@@ -40,9 +40,12 @@ export default function EditorContainer({ show = true }: EditorContainerProps) {
   const handleSave = async () => {
     await saveFile();
     await fileService.emitDynamicFileEvent({
-      endpoint: '/file/create',
+      endpoint: '/file/update',
       method: 'POST',
-      body: { filePath: `${$currentDirectory()}/${name}`, type },
+      body: {
+        filePath: $editorActiveFilePath(),
+        content: $editorActiveContent(),
+      },
       event: 'updateFile',
     });
   };

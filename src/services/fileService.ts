@@ -1,5 +1,12 @@
 import { io, Socket } from 'socket.io-client';
 import { currentDirectory, setDirectoryChildren, addRecentDirectory } from '../stores/fileStore';
+import {
+  editorActiveFilePath,
+  editorActiveContent,
+  editorOpenTabs,
+  editorUnsaved,
+  editorLanguage,
+} from '../stores/editorContent';
 import { type APIProps } from '../types/api';
 
 export class FileService {
@@ -18,6 +25,13 @@ export class FileService {
     this.socket.on('connect', () => {
       console.log(`[✔] FileService connected: ${this.socket?.id}`);
     });
+    this.socket.on('openFileResponse', (data) => {
+      this.handleOpenFile(data);
+    });
+
+    this.socket.on('closeFileResponse', (data) => {
+      this.handleCloseFile(data);
+    });
     this.socket.on('fileUploadProgress', (progress) => {
       console.log(`Upload: ${progress.percent}%`);
     });
@@ -28,6 +42,30 @@ export class FileService {
 
     this.socket.on('fileUploadResponse', (data) => {
       console.log('Upload complete:', data);
+    });
+    this.socket.on('listFilesResponse', (data) => {
+      console.log('listFilesResponse', data);
+    });
+    this.socket.on('readFileProgress', (data) => {
+      console.log('readFileProgress', data);
+    });
+    this.socket.on('readFileResponse', (data) => {
+      //console.log('readFileResponse', data);
+      this.editorTools(data);
+    });
+    this.socket.on('formatCodeProgress', (data) => {
+      console.log('formatCodeProgress', data);
+      //this.handleReadFile(data);
+    });
+    this.socket.on('formatCodeResponse', (data) => {
+      console.log('formatCodeResponse', data);
+      this.editorTools(data);
+    });
+    this.socket.on('optimizeCodeProgress', (data) => {
+      console.log('optimizeCodeProgress', data);
+    });
+    this.socket.on('optimizeCodeResponse', (data) => {
+      this.editorTools(data);
     });
     this.socket.on('disconnect', () => {
       console.log(`FileService disconnected: ${this.socket?.id}`);
@@ -63,16 +101,36 @@ export class FileService {
       });
     });
   }
+  private editorTools(data: { path: string; language: string; content: string }) {
+    editorActiveFilePath.set(data.path || editorActiveFilePath.get());
+    editorActiveContent.set(data.content);
+    editorLanguage.set(data.language || editorLanguage.get());
+  }
+  private handleOpenFile(data: { path: string; content: string }) {
+    //console.log(`Opened file: ${data.path}`);
+    editorActiveFilePath.set(data.path);
+    editorActiveContent.set(data.content);
+    editorOpenTabs.set((tabs) => (tabs.includes(data.path) ? tabs : [...tabs, data.path]));
+    editorUnsaved.set((unsaved) => {
+      unsaved[data.path] = false;
+      return unsaved;
+    });
+  }
 
+  private handleCloseFile(data: { path: string }) {
+    console.log(`Closed file: ${data.path}`);
+    editorOpenTabs.set((tabs) => tabs.filter((p) => p !== data.path));
+    if (editorActiveFilePath.get() === data.path) {
+      const remaining = editorOpenTabs.get();
+      editorActiveFilePath.set(remaining[0] || '');
+      editorActiveContent.set(remaining[0] ? editorActiveContent.get() : '');
+    }
+    editorUnsaved.set((unsaved) => {
+      delete unsaved[data.path];
+      return unsaved;
+    });
+  }
   private handleStoreUpdate(data: { endpoint: string; method: string; body?: any; event: string }, res: any) {
-    /*if (data.event === 'listFiles' && typeof data.endpoint === 'string') {
-      // Extract directory from query param
-      const url = new URL(`${this.base}${data.endpoint}`, window.location.origin);
-      const dir = url.searchParams.get('directory') || './';
-      setDirectoryChildren(dir, res);
-      addRecentDirectory(dir);
-      currentDirectory.set(dir);
-    }*/
     if (data.event === 'readFile') {
       console.log(data, data.event);
     }

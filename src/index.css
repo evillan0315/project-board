@@ -68,7 +68,9 @@
     }
   }
 }
-
+.cursor-ns-resize {
+  cursor: ns-resize;
+}
 @layer components {
   .border-t,
   .border-b,
@@ -134,9 +136,6 @@
   .dropdown-menu li:hover {
     background-color: var(--color-hover);
   }
-
- 
-
   .terminal.xterm {
     @apply p-3;
   }
@@ -250,6 +249,28 @@
   }
   .dialog-modal .btn-confirm-cancel {
     background-color: var(--color-modal-bg);
+  }
+  form label::first-letter {
+   text-transform: uppercase;
+   padding: 4px 0;
+  }
+  .modal-wrapper {
+    background-color: var(--color-modal-bg);
+  }
+  .modal-body {
+    background-color: var(--color-bg);
+
+  }
+  .modal-tabs button {
+    @apply rounded-t;
+    @apply rounded-b-none;
+    margin-right: 2px;
+  }
+  .modal-tabs button.active {
+    background-color: var(--color-bg);
+  }
+  .field-group  {
+    background-color: var(--color-pre-bg);
   }
 }
 @layer components {

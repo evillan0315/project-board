@@ -4,6 +4,7 @@ import { showToast } from '../../../stores/toast';
 import api from '../../../services/api';
 import { getBlobFileUrl } from '../../../services/file';
 import RecordingModalPlayer from '../../../components/media/RecordingModalPlayer';
+import MiniVideoPlayer from '../../../components/media/MiniVideoPlayer';
 import FooterMiniAudioPlayer from '../../../components/media/FooterMiniAudioPlayer';
 import { saveRecordId } from '../../../stores/fileStore';
 import { useStore } from '@nanostores/solid';
@@ -16,6 +17,7 @@ export const MiddleFooter = (props: MiddleFooterProps): JSX.Element => {
   const [recordingPath, setRecordingPath] = createSignal<string | null>(null);
   const [recordingUrl, setRecordingUrl] = createSignal<string | null>(null);
   const [recordingId, setRecordingId] = createSignal<string | null>(null);
+  const [isVideoOpen, setIsVideoOpen] = createSignal(false);
 
   const $recordId = useStore(saveRecordId);
   onMount(() => {
@@ -90,7 +92,7 @@ export const MiddleFooter = (props: MiddleFooterProps): JSX.Element => {
           <Button
             icon="streamline-ultimate:video-player-movie-bold"
             class="btn-icon"
-            onClick={() => openMiniVideoPlayer()}
+            onClick={() => setIsVideoOpen(!isVideoOpen())}
             title="Open Mini Video Player"
           />
           <Button
@@ -100,9 +102,9 @@ export const MiddleFooter = (props: MiddleFooterProps): JSX.Element => {
             title="Take a screenshot of the current screen"
           />
           <Button
-            icon={isRecording()  || $recordId() ? 'mdi:stop-circle' : 'mdi:record-rec'}
+            icon={isRecording() || $recordId() ? 'mdi:stop-circle' : 'mdi:record-rec'}
             onClick={handleScreenRecordToggle}
-            title={isRecording()  || $recordId() ? 'Stop screen recording' : 'Start screen recording'}
+            title={isRecording() || $recordId() ? 'Stop screen recording' : 'Start screen recording'}
             class={isRecording() ? 'text-red-600' : ''}
           >
             {isRecording() || $recordId() ? 'Recording...' : 'Record Screen'}
@@ -112,6 +114,9 @@ export const MiddleFooter = (props: MiddleFooterProps): JSX.Element => {
 
       <Show when={!isRecording() && recordingUrl()}>
         <RecordingModalPlayer path={recordingUrl()!} onClose={() => recordingUrl(null)} />
+      </Show>
+      <Show when={isVideoOpen()}>
+        <MiniVideoPlayer />
       </Show>
     </>
   );

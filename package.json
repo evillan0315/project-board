@@ -63,6 +63,7 @@
     "marked": "^15.0.12",
     "path-browserify": "^1.0.1",
     "prismjs": "^1.30.0",
+    "qs": "^6.14.0",
     "socket.io-client": "^4.8.1",
     "solid-apexcharts": "^0.4.0",
     "solid-js": "^1.9.7",

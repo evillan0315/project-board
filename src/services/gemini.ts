@@ -1,6 +1,6 @@
 import api from './api';
 import { useEditorFile } from '../hooks/useEditorFile';
-
+import { fileService } from '../services/fileService';
 const { createFile } = useEditorFile();
 export async function generateGeminiText(prompt, systemInstruction, conversationId) {
   try {
@@ -54,10 +54,15 @@ export async function generateGeminiFile(prompt, fileData, systemInstruction, co
     if (!response.data) {
       throw new Error('Failed to Generate content');
     }
-    const stripCode = response.data;
-    const createResponse = await createFile('./docs/gemini/', fileData.name, stripCode.content);
+    const stripCode = await api.post('/utils/markdown-to-plain-text', { content: response.data });
+    const createFile = await api.post('/file/create', {
+      filePath: `./docs/gemini/${fileData.name}`,
+      content: stripCode.data.text,
+      type: 'file',
+      isDirectory: false,
+    });
 
-    return createResponse.filePath;
+    return stripCode.data.text;
   } catch (error) {
     console.error('Error calling Gemini File API:', error);
     throw error;

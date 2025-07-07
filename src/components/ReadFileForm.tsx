@@ -47,14 +47,14 @@ export default function ReadFileForm() {
       <form onSubmit={handleSubmit} class="space-y-4 p-4 border rounded">
         <div>
           <label class="block font-medium">Upload File:</label>
-          <input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+          <input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} class="rounded" />
         </div>
 
         <div>
           <label class="block font-medium">File Path:</label>
           <input
             type="text"
-            class="border p-1 w-full"
+            class="border p-1 w-full rounded"
             value={filePath()}
             onInput={(e) => setFilePath(e.currentTarget.value)}
           />
@@ -62,7 +62,12 @@ export default function ReadFileForm() {
 
         <div>
           <label class="block font-medium">URL:</label>
-          <input type="text" class="border p-1 w-full" value={url()} onInput={(e) => setUrl(e.currentTarget.value)} />
+          <input
+            type="text"
+            class="border p-1 w-full rounded"
+            value={url()}
+            onInput={(e) => setUrl(e.currentTarget.value)}
+          />
         </div>
 
         <div class="flex items-center space-x-2">

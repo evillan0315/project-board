@@ -2,7 +2,6 @@ import { createEffect, createMemo, onMount, onCleanup, type Component, type JSX,
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, basicSetup } from 'codemirror';
 import { useStore } from '@nanostores/solid';
-
 import { theme } from '../../stores/theme';
 import { editorContent, editorFilePath, editorUnsaved } from '../../stores/editorContent';
 import { detectLanguage } from '../../utils/editorLanguage';
@@ -41,11 +40,11 @@ const Editor: Component<EditorProps> = (props) => {
   );
 };
 
-export function editorContainer(props: { ref: (el: HTMLDivElement) => void }): JSX.Element {
+function editorContainer(props: { ref: (el: HTMLDivElement) => void }): JSX.Element {
   return <div id="editor" ref={props.ref} class="h-full" />;
 }
 
-export function useCodeMirror(
+function useCodeMirror(
   getContainer: () => HTMLDivElement | undefined,
   $content: () => string,
   $filePath: () => string,

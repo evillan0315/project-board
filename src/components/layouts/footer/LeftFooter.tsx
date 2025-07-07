@@ -1,6 +1,6 @@
 import { Show, type JSX } from 'solid-js';
 
-import { company } from '../../../data/app';
+import AppInfo from '../../../components/apps/AppInfo';
 
 interface LeftFooterProps {
   show?: boolean;
@@ -8,7 +8,7 @@ interface LeftFooterProps {
 export const LeftFooter = (props: LeftFooterProps): JSX.Element => {
   return (
     <Show when={props.show}>
-      <p>© 2025 {company.name}.</p>
+      <AppInfo />
     </Show>
   );
 };

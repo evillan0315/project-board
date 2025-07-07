@@ -24,8 +24,6 @@ export default function Editor() {
   return (
     <>
       <EditorLayout leftSidebar={true} rightSidebar={false} content={<EditorContainer />} />
-
-      <AudioPlayerToggle />
     </>
   );
 }

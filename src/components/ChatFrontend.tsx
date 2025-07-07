@@ -15,30 +15,28 @@ const Chat = () => {
   const [isLoading, setIsLoading] = createSignal(false);
 
   const sendMessage = async () => {
-    if (!input()) return;
+    const content = input().trim();
+    if (!content) return;
 
     const userMessage: Message = {
       id: crypto.randomUUID(),
       sender: 'user',
-      content: input(),
+      content,
     };
 
-    setMessages([...messages(), userMessage]);
+    // Add user message once
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: input() }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: content }), // use captured content
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
       const data = await response.json();
 
@@ -48,7 +46,7 @@ const Chat = () => {
         content: data.response,
       };
 
-      setMessages([...messages(), userMessage, botMessage]);
+      setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Failed to send message:', error);
       const errorMessage: Message = {
@@ -56,7 +54,8 @@ const Chat = () => {
         sender: 'bot',
         content: 'Failed to get response. Please try again.',
       };
-      setMessages([...messages(), userMessage, errorMessage]);
+
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -81,52 +80,54 @@ const Chat = () => {
   });
 
   return (
-    <div class="flex flex-col h-screen bg-gray-100 dark:bg-gray-950">
-      <div class="flex-grow overflow-y-auto p-4" id="chat-container">
-        <For each={messages()}>
-          {(message) => (
-            <div class={`mb-2 flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div
-                class={`rounded-lg py-2 px-3 max-w-2/3 break-words ${
-                  message.sender === 'user'
-                    ? 'bg-sky-950 text-gray-100 dark:bg-sky-600 dark:text-gray-100'
-                    : 'bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
-                }`}
-              >
-                {message.content}
+    <>
+      <div class="flex flex-col overflow-auto bg-gray-100 dark:bg-gray-950">
+        <div class="flex-grow overflow-y-auto p-4" id="chat-container">
+          <For each={messages()}>
+            {(message) => (
+              <div class={`mb-2 flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div
+                  class={`rounded-lg py-2 px-3 max-w-2/3 break-words ${
+                    message.sender === 'user'
+                      ? 'bg-sky-950 text-gray-100 dark:bg-sky-600 dark:text-gray-100'
+                      : 'bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
+                  }`}
+                >
+                  {message.content}
+                </div>
+              </div>
+            )}
+          </For>
+          {isLoading() && (
+            <div class="flex justify-start mb-2">
+              <div class="rounded-lg py-2 px-3 bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-100">
+                Loading...
               </div>
             </div>
           )}
-        </For>
-        {isLoading() && (
-          <div class="flex justify-start mb-2">
-            <div class="rounded-lg py-2 px-3 bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-100">
-              Loading...
-            </div>
-          </div>
-        )}
-      </div>
+        </div>
 
-      <div class="p-4 bg-gray-200 dark:bg-gray-800">
-        <div class="flex rounded-lg overflow-hidden">
-          <input
-            type="text"
-            class="flex-grow bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-2 px-3 focus:outline-none"
-            placeholder="Type your message..."
-            value={input()}
-            onInput={handleInputChange}
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            class="bg-sky-950 dark:bg-sky-600 text-gray-100 font-semibold py-2 px-4 hover:bg-sky-800 dark:hover:bg-sky-500 focus:outline-none"
-            onClick={sendMessage}
-            disabled={isLoading()}
-          >
-            Send
-          </button>
+        <div class="p-4 bg-gray-200 dark:bg-gray-800">
+          <div class="flex rounded-lg overflow-hidden">
+            <input
+              type="text"
+              class="flex-grow bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-2 px-3 focus:outline-none"
+              placeholder="Type your message..."
+              value={input()}
+              onInput={handleInputChange}
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              class="bg-sky-950 dark:bg-sky-600 text-gray-100 font-semibold py-2 px-4 hover:bg-sky-800 dark:hover:bg-sky-500 focus:outline-none"
+              onClick={sendMessage}
+              disabled={isLoading()}
+            >
+              Send
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

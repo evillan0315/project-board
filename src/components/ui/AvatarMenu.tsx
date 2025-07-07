@@ -2,6 +2,7 @@ import { Show, createSignal, onCleanup, onMount } from 'solid-js';
 import { useAuth } from '../../contexts/AuthContext';
 import { A, useNavigate } from '@solidjs/router';
 import { Button } from './Button';
+import { openSettings } from '../../stores/settings'; // Import the helper
 
 export default function AvatarMenu() {
   const auth = useAuth();
@@ -39,20 +40,20 @@ export default function AvatarMenu() {
         <Show
           when={auth.user()?.image}
           fallback={
-            <>
-              <Button variant="secondary">{getInitial()}</Button>
-            </>
+            <Button variant="secondary" onClick={() => setIsOpen((prev) => !prev)}>
+              {getInitial()}
+            </Button>
           }
         >
           <Button
             variant="secondary"
             onClick={() => setIsOpen((prev) => !prev)}
-            class="h-8 w-8 btn-icon border-none hover:bg-transparent hover:bg-transparent p-0"
+            class="h-8 w-8 btn-icon border-none hover:bg-transparent p-0"
           >
             <img
               src={`${import.meta.env.BASE_URL_API}/api/file/proxy?url=${encodeURIComponent(auth.user()?.image ?? '')}`}
               alt="Profile"
-              class="rounded-xl h-full w-full object-cover outline-2 outline-offset-2 outline-gray-500 "
+              class="rounded-xl h-full w-full object-cover outline-2 outline-offset-2 outline-gray-500"
             />
           </Button>
         </Show>
@@ -60,16 +61,26 @@ export default function AvatarMenu() {
         <Show when={isOpen()}>
           <div
             ref={menuRef}
-            class="dropdown-menu absolute top-9 right-0 z-50 mt-2 w-48 origin-top-right rounded-md p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="dropdown-menu absolute top-9 right-0 z-50 mt-2 w-48 origin-top-right rounded-md p-1 shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-gray-800"
           >
             <A
               href="/profile"
-              class="block w-full px-4 py-2 text-left text-sm rounded-md"
+              class="block w-full px-4 py-2 text-left text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
               onClick={() => setIsOpen(false)}
             >
               View Profile
             </A>
-            <Button onClick={handleLogout} variant="secondary">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                openSettings('General');
+                setIsOpen(false);
+              }}
+              class="w-full text-left text-sm"
+            >
+              User Settings
+            </Button>
+            <Button onClick={handleLogout} variant="secondary" class="w-full text-left text-sm">
               Logout
             </Button>
           </div>

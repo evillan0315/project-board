@@ -1,5 +1,5 @@
 import { splitProps, Show, createEffect, type JSX } from 'solid-js';
-import { Icon } from '@iconify-icon/solid';
+import { Icon } from './Icon';
 import { resolveSizeClasses, resolveStateClasses } from '../../utils/classResolver';
 
 type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {

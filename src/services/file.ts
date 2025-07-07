@@ -1,34 +1,4 @@
-//import api from './api';
-
-/*export async function getBlobFileUrl(
-  filePath: string,
-  onProgress?: (progress: { loaded: number; total?: number; percent?: number }) => void
-): Promise<string | undefined> {
-  if (!filePath) {
-    console.error('File path is required.');
-    return;
-  }
-
-  try {
-    const res = await api.get('/file/download', {
-      params: { filePath },
-      responseType: 'blob',
-      onDownloadProgress: (progressEvent) => {
-        const { loaded, total } = progressEvent;
-        const percent = total ? Math.round((loaded * 100) / total) : undefined;
-        if (onProgress) {
-          onProgress({ loaded, total, percent });
-        }
-      },
-    });
-
-    const blob = new Blob([res.data]);
-    const blobUrl = URL.createObjectURL(blob);
-    return blobUrl;
-  } catch (err: any) {
-    console.error('Error downloading file:', err);
-  }
-}*/
+import { type APIProps } from '../types/api';
 
 import { fileService } from './fileService';
 import api from './api'; // Your Axios API
@@ -39,7 +9,7 @@ export function getBlobFileUrl(filePath: string): string {
   return `${baseUrl}/api/file/stream?filePath=${encodeURIComponent(filePath)}`;
 }
 
-export async function getMediaStreamUrl(filePath: string): Promise<string> {
+export async function downloadFile(filePath: string): Promise<string> {
   // Ensure WebSocket connection
   const socket = await fileService.connect();
 
@@ -77,4 +47,8 @@ export async function getMediaStreamUrl(filePath: string): Promise<string> {
   } catch (err: any) {
     console.error('HTTP download error:', err.message);
   }
+}
+
+export async function editorTools(data: APIProps) {
+  return await fileService.emitDynamicFileEvent(data);
 }

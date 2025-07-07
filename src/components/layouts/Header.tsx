@@ -11,7 +11,7 @@ import { openSettings } from '../../stores/settings';
 
 export default function Header() {
   return (
-    <header class="fixed sticky top-0 flex items-center h-12 px-2 justify-between shadow-lg border-b py-1">
+    <header class="fixed sticky top-0 flex items-center h-12 px-2 justify-between shadow-lg border-b py-1 z-50">
       <div class="flex items-center justify-center">
         <div class="flex-1 align-center">
           <Logo name={company.name} />

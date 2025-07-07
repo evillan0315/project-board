@@ -19,17 +19,18 @@ export default function MiniVideoPlayer(props: MiniVideoPlayerProps) {
 
   //const [position, setPosition] = createSignal({ x: 50, y: 50 });
   const [position, setPosition] = createSignal({
-    x: window.innerWidth - 320 - 20, // 20px margin from the right
-    y: window.innerHeight - 180 - 20, // 20px margin from the bottom
+    x: window.innerWidth - 310 - 20, // 20px margin from the right
+    y: window.innerHeight - 210 - 20, // 20px margin from the bottom
   });
   const [size, setSize] = createSignal({ width: 320, height: 180 });
   const [videos, setVideos] = createSignal<{ name: string; path: string }[]>([]);
   const [currentIndex, setCurrentIndex] = createSignal(0);
   const [showList, setShowList] = createSignal(false);
 
-  const fetchVideos = async (directory = './downloads/recordings', collected: any[] = []) => {
+  const fetchVideos = async (directory = './downloads', collected: any[] = []) => {
     try {
       const res = await api.get(`/file/list?directory=${encodeURIComponent(directory)}&recursive=true`);
+      console.log(res, 'res');
       for (const item of res.data) {
         if (item.isDirectory) {
           // Recurse into the subdirectory
@@ -40,7 +41,7 @@ export default function MiniVideoPlayer(props: MiniVideoPlayerProps) {
       }
 
       // Only update state when initial call finishes
-      if (directory === './downloads/recordings') {
+      if (directory === './downloads') {
         setVideos(collected);
         if (collected.length > 0) {
           setCurrentIndex(0);
@@ -204,6 +205,7 @@ export default function MiniVideoPlayer(props: MiniVideoPlayerProps) {
       </div>
       <div data-vjs-player class="flex-1 relative">
         <video
+          controls
           ref={videoRef}
           class="video-js vjs-default-skin w-full h-full object-contain"
           style={{ width: '100%', height: '100%' }}

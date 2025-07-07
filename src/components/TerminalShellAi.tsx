@@ -1,15 +1,14 @@
-// src/components/TerminalShellAi
 import { createSignal, onCleanup, onMount } from 'solid-js';
-import { Terminal } from '@xterm/xterm'; // This import is not strictly needed here as Terminal is managed by the hook
-import { FitAddon } from '@xterm/addon-fit'; // This import is not strictly needed here as FitAddon is managed by the hook
-import { io, Socket } from 'socket.io-client'; // This import seems unused in the provided snippet
+import { Terminal } from '@xterm/xterm';
+import { FitAddon } from '@xterm/addon-fit';
+import { io, Socket } from 'socket.io-client'; //  import seems unused
 import '@xterm/xterm/css/xterm.css';
 import { Button } from './ui/Button';
-import { useGeminiTerminal } from '../hooks/useGeminiTerminal'; // Your updated hook
+import { useGeminiTerminal } from '../hooks/useGemini';
 
 interface TerminalShellProps {
   fontSize?: number;
-  autoFocus?: boolean; // Not used in this snippet
+  autoFocus?: boolean; // Not used
   onClose?: () => void;
 }
 
@@ -19,28 +18,40 @@ export default function TerminalShellAi(props: TerminalShellProps) {
   const [isResizing, setIsResizing] = createSignal(false);
 
   // Use the updated hook
-  const { term, initialize, handleResize, dispose, isProcessingCommand } = useGeminiTerminal({
+  const { term, initialize, handleResize, dispose, isProcessingCommand, isWriting } = useGeminiTerminal({
     fontSize: props.fontSize ?? 12,
-    // The 'prompt' prop is no longer directly used by useGeminiTerminal's public interface for display.
-    // The prompt is now managed internally by the hook.
   });
-
-  const startResizing = () => {
+  const fitAddon = new FitAddon();
+  const startResizing = (e: MouseEvent) => {
+    e.preventDefault(); // Prevent text selection during resize
     setIsResizing(true);
     document.body.style.cursor = 'ns-resize';
+    fitAddon.fit();
   };
 
   const stopResizing = () => {
     if (isResizing()) {
       setIsResizing(false);
       document.body.style.cursor = '';
+      // After resizing stops, fit the terminal to the new size
+      fitAddon.fit();
     }
   };
 
   const onMouseMove = (e: MouseEvent) => {
     if (isResizing()) {
       const rect = terminalRef.getBoundingClientRect();
-      setHeight(Math.max(100, rect.bottom - e.clientY));
+      // Calculate the new height based on mouse position
+      let newHeight = rect.bottom - e.clientY;
+      newHeight = Math.max(100, newHeight); // Minimum height
+
+      // Ensure the height is within reasonable bounds (optional)
+      newHeight = Math.min(window.innerHeight - 50, newHeight); // Prevent going off-screen
+
+      setHeight(newHeight);
+      // Important: Force xterm.js to redraw with the new size.
+      term?.resize(term.cols, Math.floor(newHeight / (term.rows / term.rows)));
+      fitAddon.fit();
     }
   };
 
@@ -52,11 +63,13 @@ export default function TerminalShellAi(props: TerminalShellProps) {
     window.addEventListener('resize', handleResize);
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', stopResizing);
+    document.addEventListener('mouseleave', stopResizing); //stop resizing when mouse leaves the window
 
     onCleanup(() => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', stopResizing);
+      document.removeEventListener('mouseleave', stopResizing);
       dispose(); // Clean up xterm.js instance
     });
   });
@@ -81,10 +94,12 @@ export default function TerminalShellAi(props: TerminalShellProps) {
               ></path>
             </svg>
           </span>
-          <span class="text-xs text-yellow-400">(Thinking...)</span>
+          <span class="text-xs text-yellow-400">({isWriting() ? 'Writing...' : 'Thinking...'})</span>
         </div>
       )}
-      <div ref={(el) => (terminalRef = el)} class="text-xs font-mono" style={{ height: `${height()}px` }} />
+      <div class="h-full" style={{ height: `${height()}px` }}>
+        <div ref={(el) => (terminalRef = el)} class="text-xs font-mono h-full w-full" />
+      </div>
     </div>
   );
 }

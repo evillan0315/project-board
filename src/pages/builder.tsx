@@ -2,7 +2,7 @@ import { Show } from 'solid-js';
 
 import { useAuth } from '../contexts/AuthContext';
 
-import DynamicForm from '../components/form/DynamicForm';
+import EditorWithToolbar from '../components/editor/EditorWithToolbar';
 
 export default function Builder() {
   const handleSubmit = (data: any) => {
@@ -99,7 +99,7 @@ export default function Builder() {
   const { isAuthenticated } = useAuth();
   return (
     <div class="flex-1 h-full overflow-auto">
-      <DynamicForm schema={schema2} onSubmit={handleSubmit} />
+      <EditorWithToolbar />
     </div>
   );
 }
